@@ -3,7 +3,7 @@ public class Main {
 	static ArrayList<Operateur> lop = new ArrayList<Operateur>();
 	static double somme_rep = 0;
 	static int duree_simu = 20;
-	static double modifrep = 0.1;
+	static double modifrep = 0.5;
 	public static void main(String[] args){
 		Client cl = new Client();
 		Operateur op1 = new Operateur(10000, 0.6);
@@ -37,18 +37,15 @@ public class Main {
 			double echec = Math.random(); //détermine si la requete a réussi ou échoué
 			if(cl.getCap() > top.getCap() || echec <= probaechec){
 				System.out.println("echec");
-				top.setRep(modifrep);
+				top.setRep(modifrep*top.getRep());
 			}
 			else{
 				System.out.println("réussi");
-				top.setRep(modifrep+1-modifrep);
+				top.setRep((modifrep*top.getRep())+(1-modifrep));
 				top.getListe_req().add(cl);
 				top.setCap(top.getCap()-cl.getCap());
 			}
-			if (choixop < op1.getRep())
-				op1 = top;
-			else
-				op2 = top;
+			
 			--duree_simu;
 			System.out.println("op1 rep = "+ op1.getRep());
 			System.out.println("op2 rep = "+ op2.getRep());
