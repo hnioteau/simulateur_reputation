@@ -7,6 +7,7 @@ public class Operateur {
 	private ArrayList<Client> liste_req = new ArrayList<Client>(); //ensemble des requetes en cours d'execution par l'opérateur
 	Operateur(int c, double r){
 		setCapinit(c);
+		setCap(c);
 		setRep(r);
 	}
 	public double getRep() {

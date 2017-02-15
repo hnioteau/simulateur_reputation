@@ -9,7 +9,7 @@ public class Main {
 		Operateur op1 = new Operateur(10000, 0.6);
 		lop.add(op1);
 		somme_rep += op1.getRep();
-		Operateur op2 = new Operateur(500, 0.8);
+		Operateur op2 = new Operateur(5000, 0.8);
 		lop.add(op2);
 		somme_rep += op2.getRep();
 		while (duree_simu != 0){
@@ -25,12 +25,16 @@ public class Main {
 			}
 			double choixop = Math.random()*(somme_rep); //tirage alatoire (entre 0 et somme_rep) pour déterminer l'opérateur qui prend la requete
 			Operateur top;
-			if (choixop < op1.getRep())
+			if (choixop < op1.getRep()){
+				System.out.println("choix op1");
 				top = op1;
-			else
+			}
+			else{
+				System.out.println(" choix op2");
 				top = op2;
+			}
 			double probaechec = 1-top.getCap()/top.getCapinit(); //determine la probabilité d'échec
-			double echec = Math.random()*(probaechec); //détermine si la requete a réussi ou échoué
+			double echec = Math.random(); //détermine si la requete a réussi ou échoué
 			if(cl.getCap() > top.getCap() || echec <= probaechec){
 				System.out.println("echec");
 				top.setRep(modifrep);
@@ -39,6 +43,7 @@ public class Main {
 				System.out.println("réussi");
 				top.setRep(modifrep+1-modifrep);
 				top.getListe_req().add(cl);
+				top.setCap(top.getCap()-cl.getCap());
 			}
 			if (choixop < op1.getRep())
 				op1 = top;

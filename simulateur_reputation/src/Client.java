@@ -1,6 +1,6 @@
 
 public class Client {
-	private int cap = 100;
+	private int cap = 1000;
 	private int duree = 10;
 	public int getCap() {
 		return cap;
