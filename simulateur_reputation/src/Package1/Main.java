@@ -64,16 +64,12 @@ public class Main {
 			
 			
 		}
-		
-		
 		JFrame interfaceGraphique = new JFrame();
-		interfaceGraphique.setContentPane(new InterfaceGraphique());
-		
-		interfaceGraphique.setLocation(200, 150);
-		interfaceGraphique.pack();
-		interfaceGraphique.setVisible(true);
+		interfaceGraphique.setTitle("Simulateur Reputation");
+		interfaceGraphique.setSize(400, 100);
+		interfaceGraphique.setLocationRelativeTo(null);
 		interfaceGraphique.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		interfaceGraphique.setVisible(true);
 		
-		
-	}
+		}
 }
