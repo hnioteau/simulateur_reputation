@@ -1,10 +1,26 @@
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.OutputStreamWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class Main {
 	static ArrayList<Operateur> lop = new ArrayList<Operateur>();
 	static double somme_rep = 0;
 	static int duree_simu = 20;
 	static double modifrep = 0.5;
+	
 	public static void main(String[] args){
+		OutputStreamWriter fout = null;
+		try {
+			fout = new OutputStreamWriter(new FileOutputStream(new File("results.txt")));
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}	
+		
 		Client cl = new Client();
 		Operateur op1 = new Operateur(10000, 0.6);
 		lop.add(op1);
@@ -46,9 +62,23 @@ public class Main {
 				top.setCap(top.getCap()-cl.getCap());
 			}
 			
+			try {
+				fout.write("op1 rep = "+ op1.getRep() + " op2 rep = "+ op2.getRep() + System.lineSeparator());
+				fout.flush();
+				System.out.println("Try");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			--duree_simu;
 			System.out.println("op1 rep = "+ op1.getRep());
 			System.out.println("op2 rep = "+ op2.getRep());
+		}
+		
+		try {
+			if (fout != null)
+				fout.close();
+		} catch (IOException e2) {
+			e2.printStackTrace();
 		}
 	}
 }

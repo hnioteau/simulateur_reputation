@@ -64,7 +64,7 @@ public class Main {
 			
 			
 		}
-		JFrame interfaceGraphique = new JFrame();
+		InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
 		interfaceGraphique.setTitle("Simulateur Reputation");
 		interfaceGraphique.setSize(400, 100);
 		interfaceGraphique.setLocationRelativeTo(null);
