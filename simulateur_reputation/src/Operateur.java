@@ -6,34 +6,59 @@ public class Operateur {
 	private double rep;
 	static double modifrep = 0.5;
 	private ArrayList<Client> liste_req = new ArrayList<Client>(); //ensemble des requetes en cours d'execution par l'opérateur
+	
+	
 	Operateur(int c, double r){
 		setCapinit(c);
 		setCap(c);
 		setRep(r);
 	}
+	
 	public double getRep() {
 		return rep;
 	}
+	
 	public void setRep(double rep) {
-		this.rep = rep;
+		if(rep <= 1 && rep >= 0)
+			this.rep = rep;
 	}
+	
 	public int getCap() {
 		return cap;
 	}
+	
 	public void setCap(int cap) {
-		this.cap = cap;
+		if(cap <= this.capinit && cap >= 0)
+			this.cap = cap;
 	}
+	
 	public int getCapinit() {
 		return capinit;
 	}
+	
 	public void setCapinit(int capinit) {
 		this.capinit = capinit;
 	}
+	
 	public ArrayList<Client> getListe_req() {
 		return liste_req;
 	}
+	
 	public void setListe_req(ArrayList<Client> liste_req) {
-		this.liste_req = liste_req;
+		int i;
+		int sommeCap = 0;
+		
+		for(i = 0 ; i < liste_req.size() ; i++) {
+			sommeCap += liste_req.get(i).getCap();
+		}
+		
+		if(sommeCap <= this.capinit)
+			this.liste_req = liste_req;
+	}
+	
+	public void addRequest (Client client) {
+		getListe_req().add(client);
+		setCap(getCap() - client.getCap());
 	}
 	
 	public void setRepReussi(){
@@ -45,17 +70,20 @@ public class Operateur {
 	}
 	
 	public double ProbaEchec(){
-		return 1-cap/capinit;
+		return 1-(cap/capinit);
 	}
 	
-	public void verifiacationEtatRequete(){
+	public void verificationEtatRequete(){
+		
 		for(int j = 0; j < getListe_req().size(); ++j){
 			Client c = getListe_req().get(j);
 			c.setDuree(getListe_req().get(j).getDuree() - 1);
+			
 			if (c.getDuree() != 0){
 				getListe_req().remove(j);
 				setCap(getCap()+c.getCap());
 			}
 		}
 	}
+	
 }
