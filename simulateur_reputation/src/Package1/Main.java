@@ -12,6 +12,16 @@ public class Main {
 	static int duree_simu = 20;
 	static double modifrep = 0.5;
 	public static void main(String[] args){
+	
+		InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
+		interfaceGraphique.setTitle("Simulateur Reputation");
+		interfaceGraphique.setSize(640, 360);
+		interfaceGraphique.setLocationRelativeTo(null);
+		interfaceGraphique.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		interfaceGraphique.setVisible(true);
+		
+		}
+	public static void lancerSimulation(){
 		Client cl = new Client();
 		Operateur op1 = new Operateur(10000, 0.6);
 		lop.add(op1);
@@ -56,20 +66,6 @@ public class Main {
 			--duree_simu;
 			System.out.println("op1 rep = "+ op1.getRep());
 			System.out.println("op2 rep = "+ op2.getRep());
-			
-			
-			
-			
-			
-			
-			
-		}
-		InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
-		interfaceGraphique.setTitle("Simulateur Reputation");
-		interfaceGraphique.setSize(640, 360);
-		interfaceGraphique.setLocationRelativeTo(null);
-		interfaceGraphique.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		interfaceGraphique.setVisible(true);
-		
+			}	
 		}
 }

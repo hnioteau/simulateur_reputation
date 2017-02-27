@@ -35,7 +35,7 @@ public class InterfaceGraphique extends JFrame implements ActionListener {
 		paletteBtn.setBackground(Color.WHITE);
 		this.getContentPane().add(paletteBtn, BorderLayout.NORTH);
 		
-		//Création des boutons
+		//Crï¿½ation des boutons
 		JButton btnNewButton = new JButton("Creer canneva");
 		JButton btnAffClient = new JButton("Afficher client");
 		JButton btnAffOperateur = new JButton("Afficher operateur");
@@ -51,49 +51,49 @@ public class InterfaceGraphique extends JFrame implements ActionListener {
 		paletteBtn.add(btnAffOperateur);
 		paletteBtn.add(btnStartSim);
 		
-		//Ce sont maintenant nos classes internes qui écoutent nos boutons 
+		//Ce sont maintenant nos classes internes qui ï¿½coutent nos boutons 
         btnNewButton.addActionListener(new btnNewButtonListener());
         btnAffClient.addActionListener(new btnAffClientListener());
         btnAffOperateur.addActionListener(new btnAffOperateurListener());
         btnStartSim.addActionListener(new btnStartSimListener());
 	}
 	
-	//Classe écoutant notre premier bouton
+	//Classe ï¿½coutant notre premier bouton
 	class btnNewButtonListener implements ActionListener{
-	    //Redéfinition de la méthode actionPerformed()
+	    //Redï¿½finition de la mï¿½thode actionPerformed()
 		public void actionPerformed(ActionEvent arg0) {
-	    	label.setText("Vous avez cliqué sur Creer canneva");
+	    	label.setText("Vous avez cliquï¿½ sur Creer canneva");
 	    	System.out.println("Creer canneva");
 	    }
 		//Reset la zone de dessin
 	}
 	
-	//Classe écoutant notre deuxieme bouton
+	//Classe ï¿½coutant notre deuxieme bouton
 		class btnAffClientListener implements ActionListener{
-		    //Redéfinition de la méthode actionPerformed()
+		    //Redï¿½finition de la mï¿½thode actionPerformed()
 			public void actionPerformed(ActionEvent arg0) {
-		    	label.setText("Vous avez cliqué sur Afficher client");
+		    	label.setText("Vous avez cliquï¿½ sur Afficher client");
 		    	System.out.println("Afficher client");
 		    }
 		}
 	
-		//Classe écoutant notre troisieme bouton
+		//Classe ï¿½coutant notre troisieme bouton
 		class btnAffOperateurListener implements ActionListener{
-		    //Redéfinition de la méthode actionPerformed()
+		    //Redï¿½finition de la mï¿½thode actionPerformed()
 			public void actionPerformed(ActionEvent arg0) {
-		    	label.setText("Vous avez cliqué sur Afficher operateur");
+		    	label.setText("Vous avez cliquï¿½ sur Afficher operateur");
 		    	System.out.println("Afficher operateur");
 		    }
 		}
 		
-		//Classe écoutant notre quatrieme bouton
+		//Classe ï¿½coutant notre quatrieme bouton
 		class btnStartSimListener implements ActionListener{
-		    //Redéfinition de la méthode actionPerformed()
+		    //Redï¿½finition de la mï¿½thode actionPerformed()
 			public void actionPerformed(ActionEvent arg0) {
-		    	label.setText("Vous avez cliqué sur Lancer simulation");
+		    	label.setText("Vous avez cliquï¿½ sur Lancer simulation");
 		    	System.out.println("Lancer simulation");
 		    	Main.duree_simu = 20;
-		    	Main.main(null);
+		    	Main.lancerSimulation();
 		    }
 		}
 
