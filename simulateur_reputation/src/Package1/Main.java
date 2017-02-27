@@ -66,7 +66,7 @@ public class Main {
 		}
 		InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
 		interfaceGraphique.setTitle("Simulateur Reputation");
-		interfaceGraphique.setSize(400, 100);
+		interfaceGraphique.setSize(640, 360);
 		interfaceGraphique.setLocationRelativeTo(null);
 		interfaceGraphique.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		interfaceGraphique.setVisible(true);
