@@ -10,7 +10,7 @@ public class Main {
 	static ArrayList<Operateur> lop = new ArrayList<Operateur>();
 	static double somme_rep = 0;
 	static int duree_simu = 20;
-	static double modifrep = 0.5;
+	
 	
 	public static void main(String[] args){
 		OutputStreamWriter fout = null;
@@ -30,14 +30,7 @@ public class Main {
 		somme_rep += op2.getRep();
 		while (duree_simu != 0){
 			for(int i = 0; i < lop.size(); ++i){ // on vérifie pour chaque opérateur si une requete est finie
-				for(int j = 0; j < lop.get(i).getListe_req().size(); ++j){
-					Client c = lop.get(i).getListe_req().get(j);
-					c.setDuree(lop.get(i).getListe_req().get(j).getDuree() - 1);
-					if (c.getDuree() != 0){
-						lop.get(i).getListe_req().remove(j);
-						lop.get(i).setCap(lop.get(i).getCap()+cl.getCap());
-					}
-				}
+				lop.get(i).verifiacationEtatRequete();
 			}
 			double choixop = Math.random()*(somme_rep); //tirage alatoire (entre 0 et somme_rep) pour déterminer l'opérateur qui prend la requete
 			Operateur top;
@@ -49,15 +42,15 @@ public class Main {
 				System.out.println(" choix op2");
 				top = op2;
 			}
-			double probaechec = 1-top.getCap()/top.getCapinit(); //determine la probabilité d'échec
+			double probaechec = top.ProbaEchec(); //determine la probabilité d'échec
 			double echec = Math.random(); //détermine si la requete a réussi ou échoué
 			if(cl.getCap() > top.getCap() || echec <= probaechec){
 				System.out.println("echec");
-				top.setRep(modifrep*top.getRep());
+				top.setRepEchec();
 			}
 			else{
 				System.out.println("réussi");
-				top.setRep((modifrep*top.getRep())+(1-modifrep));
+				top.setRepReussi();
 				top.getListe_req().add(cl);
 				top.setCap(top.getCap()-cl.getCap());
 			}
