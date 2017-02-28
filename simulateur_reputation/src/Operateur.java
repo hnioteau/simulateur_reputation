@@ -69,17 +69,18 @@ public class Operateur {
 		rep=modifrep*rep;
 	}
 	
-	public double ProbaEchec(){
-		return 1-(cap/capinit);
+	public double probaEchec(){
+		return 1-((double) cap/(double) capinit);
 	}
 	
 	public void verificationEtatRequete(){
 		
-		for(int j = 0; j < getListe_req().size(); ++j){
+		for(int j = 0; j < getListe_req().size(); j++){
 			Client c = getListe_req().get(j);
-			c.setDuree(getListe_req().get(j).getDuree() - 1);
+			int duree = c.getDuree();
+			c.setDuree(duree - 1);
 			
-			if (c.getDuree() != 0){
+			if (c.getDuree() == 0){
 				getListe_req().remove(j);
 				setCap(getCap()+c.getCap());
 			}

@@ -22,7 +22,7 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		Client cl = new Client();
+		
 		Operateur op1 = new Operateur(10000, 0.6);
 		lop.add(op1);
 		somme_rep += op1.getRep();
@@ -33,9 +33,12 @@ public class Main {
 		
 		                         /* Lancement de la simulation */
 		while (duree_simu != 0) {
+			Client cl = new Client();
+			
 			for (int i = 0; i < lop.size(); ++i) { // on vÃ©rifie pour chaque
 													// opÃ©rateur si une requete
 													// est finie
+				
 				lop.get(i).verificationEtatRequete();
 			}
 			
@@ -61,7 +64,7 @@ public class Main {
 			
 			// modification de la réputation et ajout de la requête à l'operateur
 			// en cas de reussite
-			if (cl.getCap() > top.getCap() || echec <= top.ProbaEchec()) {
+			if (cl.getCap() > top.getCap() || echec <= top.probaEchec()) {
 				System.out.println("echec");
 				top.setRepEchec();
 			} else {
@@ -69,7 +72,7 @@ public class Main {
 				top.setRepReussi();
 				top.addRequest(cl);
 			}
-
+			
 			// Ecriture en fichier des paramètres de la simulation
 			try {
 				fout.write("op1 rep = " + op1.getRep() + " op2 rep = " + op2.getRep() + System.lineSeparator());
