@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +16,16 @@ public class Main {
 
 	
 	public static void main(String[] args) {
-		    /* Initialisation des paramètres et création des opérateurs et du client */
+		InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
+		interfaceGraphique.setTitle("Simulateur Reputation");
+		interfaceGraphique.setSize(640, 360);
+		interfaceGraphique.setLocationRelativeTo(null);
+		interfaceGraphique.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		interfaceGraphique.setVisible(true);
+	}
+	
+	public static void lancerSimulation(){
+		    /* Initialisation des paramï¿½tres et crï¿½ation des opï¿½rateurs et du client */
 		OutputStreamWriter fout = null;
 		try {
 			fout = new OutputStreamWriter(new FileOutputStream(new File("results.txt")));
@@ -62,7 +74,7 @@ public class Main {
 			double echec = Math.random(); // dÃ©termine si la requete a rÃ©ussi ou
 										  // Ã©chouÃ©
 			
-			// modification de la réputation et ajout de la requête à l'operateur
+			// modification de la rï¿½putation et ajout de la requï¿½te ï¿½ l'operateur
 			// en cas de reussite
 			if (cl.getCap() > top.getCap() || echec <= top.probaEchec()) {
 				System.out.println("echec");
@@ -73,7 +85,7 @@ public class Main {
 				top.addRequest(cl);
 			}
 			
-			// Ecriture en fichier des paramètres de la simulation
+			// Ecriture en fichier des paramï¿½tres de la simulation
 			try {
 				fout.write("op1 rep = " + op1.getRep() + " op2 rep = " + op2.getRep() + System.lineSeparator());
 				fout.flush();
