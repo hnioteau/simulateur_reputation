@@ -91,7 +91,6 @@ public class Simulation {
 		while (i < listOperators.size() && chosenOp == null) {
 			sum += listOperators.get(i).getReputation();
 			if (opChoice < sum) {
-				System.out.println("choix op" + (i+1));
 				chosenOp = listOperators.get(i);
 			}
 			
@@ -109,10 +108,8 @@ public class Simulation {
 		double failure = Math.random();
 		
 		if (client.getWeight() > operator.getCapacity() || failure <= operator.failChance()) {
-			System.out.println("echec");
 			operator.setRepFailed();
 		} else {
-			System.out.println("reussi");
 			operator.setRepSuccess();
 			operator.addRequest(client.copyClient());
 		}
@@ -171,8 +168,6 @@ public class Simulation {
 				}
 				
 				--simulationTime;
-				System.out.println("op1 rep = " + op1.getReputation() + "op1 cap = " + op1.getCapacity());
-				System.out.println("op2 rep = " + op2.getReputation() + "op2 cap = " + op2.getCapacity());
 			}
 
 			// Fermeture du fichier
