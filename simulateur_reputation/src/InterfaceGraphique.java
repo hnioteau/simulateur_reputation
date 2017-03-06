@@ -15,6 +15,7 @@ public class InterfaceGraphique extends JFrame implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Simulation simulation = new Simulation();
 	private JLabel label = new JLabel();
 	
 	private JPanel panelDessin = new JPanel();
@@ -88,8 +89,8 @@ public class InterfaceGraphique extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent arg0) {
 		    	label.setText("Vous avez clique sur Lancer simulation");
 		    	System.out.println("Lancer simulation");
-		    	Main.duree_simu = 20;
-		    	Main.lancerSimulation();
+		    	simulation.setSimulationTime(20);
+		    	simulation.runSimulation();
 		    }
 		}
 

@@ -2,18 +2,21 @@ public class Client {
 	private int weight;
 	private int duration;
 	
+	final int DEFAULT_WEIGHT = 1000;
+	final int DEFAULT_DURATION = 10;
+	
 	
 	/*
 	 * Constructeurs de la classe.
 	 */
 	Client() {
-		setWeight(1000);
-		setDuration(10);
+		this.weight = DEFAULT_WEIGHT;
+		this.duration = DEFAULT_DURATION;
 	}
 	
-	Client(int c, int d) {
-		setWeight(c);
-		setDuration(d);
+	Client(int weight, int duration) {
+		setWeight(weight);
+		setDuration(duration);
 	}
 	
 	
@@ -38,4 +41,13 @@ public class Client {
 			this.duration = duration;
 	}
 
+	
+	/*
+	 * Fait une copie du client.
+	 */
+	public Client copyClient() {
+		Client newClient = new Client(this.getWeight(), this.getDuration());
+		
+		return newClient;
+	}
 }

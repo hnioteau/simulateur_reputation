@@ -77,14 +77,14 @@ public class Operator {
 	 * Modifie la reputation de l'operateur suite à l'echec d'une requete.
 	 */
 	public void setRepSuccess(){
-		reputation=repFactor*reputation+(1-repFactor);
+		reputation = repFactor*reputation+(1-repFactor);
 	}
 	
 	/*
 	 * Modifie la reputation de l'operateur suite à la reussite d'une requete.
 	 */
 	public void setRepFailed(){
-		reputation=repFactor*reputation;
+		reputation = repFactor*reputation;
 	}
 	
 	
