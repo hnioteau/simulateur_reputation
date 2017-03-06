@@ -1,34 +1,41 @@
-
 public class Client {
-	private int cap;
-	private int duree;
+	private int weight;
+	private int duration;
 	
+	
+	/*
+	 * Constructeurs de la classe.
+	 */
 	Client() {
-		setCap(1000);
-		setDuree(10);
+		setWeight(1000);
+		setDuration(10);
 	}
 	
 	Client(int c, int d) {
-		setCap(c);
-		setDuree(d);
+		setWeight(c);
+		setDuration(d);
 	}
 	
-	public int getCap() {
-		return cap;
+	
+	/*
+	 * Getters et setters pour les attributs de la classe.
+	 */
+	public int getWeight() {
+		return weight;
 	}
 	
-	public void setCap(int cap) {
-		if(cap >= 0)
-			this.cap = cap;
+	public void setWeight(int weight) {
+		if(weight >= 0)
+			this.weight = weight;
 	}
 	
-	public int getDuree() {
-		return duree;
+	public int getDuration() {
+		return duration;
 	}
 	
-	public void setDuree(int duree) {
-		if(duree >= 0)
-			this.duree = duree;
+	public void setDuration(int duration) {
+		if(duration >= 0)
+			this.duration = duration;
 	}
 
 }

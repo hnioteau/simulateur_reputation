@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
-
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Main {
-	static ArrayList<Operateur> lop = new ArrayList<Operateur>();
+	static ArrayList<Operator> lop = new ArrayList<Operator>();
 	static double somme_rep = 0;
 	static int duree_simu = 20;
 
@@ -35,12 +33,12 @@ public class Main {
 		}
 
 		
-		Operateur op1 = new Operateur(10000, 0.6);
+		Operator op1 = new Operator(10000, 0.6);
 		lop.add(op1);
-		somme_rep += op1.getRep();
-		Operateur op2 = new Operateur(5000, 0.8);
+		somme_rep += op1.getReputation();
+		Operator op2 = new Operator(5000, 0.8);
 		lop.add(op2);
-		somme_rep += op2.getRep();
+		somme_rep += op2.getReputation();
 		
 		
 		                         /* Lancement de la simulation */
@@ -51,7 +49,7 @@ public class Main {
 													// opérateur si une requete
 													// est finie
 				
-				lop.get(i).verificationEtatRequete();
+				lop.get(i).checkRequestsState();
 			}
 			
 			double choixop = Math.random() * (somme_rep); // tirage alatoire
@@ -62,8 +60,8 @@ public class Main {
 															// prend la requete
 			
 			// choix de l'operateur
-			Operateur top;
-			if (choixop < op1.getRep()) {
+			Operator top;
+			if (choixop < op1.getReputation()) {
 				System.out.println("choix op1");
 				top = op1;
 			} else {
@@ -76,26 +74,26 @@ public class Main {
 			
 			// modification de la r�putation et ajout de la requ�te � l'operateur
 			// en cas de reussite
-			if (cl.getCap() > top.getCap() || echec <= top.probaEchec()) {
+			if (cl.getWeight() > top.getCapacity() || echec <= top.failChance()) {
 				System.out.println("echec");
-				top.setRepEchec();
+				top.setRepFailed();
 			} else {
 				System.out.println("reussi");
-				top.setRepReussi();
+				top.setRepSuccess();
 				top.addRequest(cl);
 			}
 			
 			// Ecriture en fichier des param�tres de la simulation
 			try {
-				fout.write("op1 rep = " + op1.getRep() + " op2 rep = " + op2.getRep() + System.lineSeparator());
+				fout.write("op1 rep = " + op1.getReputation() + " op2 rep = " + op2.getReputation() + System.lineSeparator());
 				fout.flush();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 			
 			--duree_simu;
-			System.out.println("op1 rep = " + op1.getRep());
-			System.out.println("op2 rep = " + op2.getRep());
+			System.out.println("op1 rep = " + op1.getReputation());
+			System.out.println("op2 rep = " + op2.getReputation());
 		}
 
 		// Fermeture du fichier
