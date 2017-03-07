@@ -1,3 +1,5 @@
+package projet;
+
 public class Client {
 	private int weight;
 	private int duration;
@@ -9,7 +11,7 @@ public class Client {
 	/*
 	 * Constructeurs de la classe.
 	 */
-	Client() {
+	public Client() {
 		this.weight = DEFAULT_WEIGHT;
 		this.duration = DEFAULT_DURATION;
 	}

@@ -1,3 +1,5 @@
+package projet;
+
 import java.util.ArrayList;
 
 public class Operator {
@@ -11,7 +13,7 @@ public class Operator {
 	/*
 	 * Constructeur de la classe.
 	 */
-	Operator(int capa, double rep){
+	public Operator(int capa, double rep){
 		setMaxCapacity(capa);
 		setCapacity(capa);
 		setReputation(rep);
@@ -65,7 +67,7 @@ public class Operator {
 	
 	
 	/*
-	 * Ajout d'une nouvelle requete à la liste.
+	 * Ajout d'une nouvelle requete ï¿½ la liste.
 	 */
 	public void addRequest (Client client) {
 		getListRequests().add(client);
@@ -74,14 +76,14 @@ public class Operator {
 	
 	
 	/*
-	 * Modifie la reputation de l'operateur suite à l'echec d'une requete.
+	 * Modifie la reputation de l'operateur suite ï¿½ l'echec d'une requete.
 	 */
 	public void setRepSuccess(){
 		reputation = repFactor*reputation+(1-repFactor);
 	}
 	
 	/*
-	 * Modifie la reputation de l'operateur suite à la reussite d'une requete.
+	 * Modifie la reputation de l'operateur suite ï¿½ la reussite d'une requete.
 	 */
 	public void setRepFailed(){
 		reputation = repFactor*reputation;
@@ -97,7 +99,7 @@ public class Operator {
 	
 	
 	/*
-	 *  Verifie l'état des requetes. Si une requete atteint 0 de durée,
+	 *  Verifie l'ï¿½tat des requetes. Si une requete atteint 0 de durï¿½e,
 	 *  la supprime de la liste des requetes.
 	*/
 	public void checkRequestsState(){
