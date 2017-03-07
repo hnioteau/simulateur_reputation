@@ -1,4 +1,3 @@
-package projet;
 
 import java.awt.Desktop;
 import java.io.File;

@@ -1,4 +1,3 @@
-package projet;
 
 import javax.swing.JFrame;
 
