@@ -32,7 +32,7 @@ public class Simulation {
 	}
 
 	public void setSumReputation(double sumReputation) {
-		if(sumReputation > 0)
+		if(sumReputation >= 0)
 			this.sumReputation = sumReputation;
 	}
 
@@ -96,6 +96,9 @@ public class Simulation {
 			
 			i++;
 		}
+
+		if (chosenOp == null)
+			System.out.println("Op null");
 		
 		return chosenOp;
 	}
@@ -106,7 +109,7 @@ public class Simulation {
 	 */
 	public void requestTreatment(Client client, Operator operator) {
 		double failure = Math.random();
-		
+			
 		if (client.getWeight() > operator.getCapacity() || failure <= operator.failChance()) {
 			operator.setRepFailed();
 		} else {
@@ -169,6 +172,10 @@ public class Simulation {
 				
 				--simulationTime;
 			}
+			// On réinitialise les paramètres pour la prochaine simulation.
+			listOperators.clear();
+			setSumReputation(0);
+			
 
 			// Fermeture du fichier
 			try {
