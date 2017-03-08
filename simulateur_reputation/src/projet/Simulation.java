@@ -12,7 +12,7 @@ public class Simulation {
 	private ArrayList<Operator> listOperators = new ArrayList<Operator>();
 	private double sumReputation;
 	private int simulationTime;
-	int useCase = 1;
+	int useCase = 0;
 	Client client = new Client();
 	final int DEFAULT_TIME = 20;
 	final String FILE_NAME = "results.txt";
@@ -127,7 +127,7 @@ public class Simulation {
 	 * Lancement de la boucle de simulation.
 	 */
 	public void runSimulation() {
-		ArrayList<Operator> listOp = new ArrayList<Operator>();
+		// ArrayList<Operator> listOp = new ArrayList<Operator>();
 		Operator chosenOp;
 		// Initialisation des valeurs par defaut.
 		final int DEFAULT_CAP1 = 10000;
@@ -144,12 +144,12 @@ public class Simulation {
 		}
 
 		// Creation des operateurs et du client.
-		Operator op1 = new Operator(DEFAULT_CAP1, DEFAULT_REP1);
-		Operator op2 = new Operator(DEFAULT_CAP2, DEFAULT_REP2);
-		Client client = new Client();
-		listOp.add(op1);
-		listOp.add(op2);
-		addOperators(listOp);
+		// Operator op1 = new Operator(DEFAULT_CAP1, DEFAULT_REP1);
+		// Operator op2 = new Operator(DEFAULT_CAP2, DEFAULT_REP2);
+		// Client client = new Client();
+		// listOp.add(op1);
+		// listOp.add(op2);
+		addOperators(Main.listOp);
 
 		/* Lancement de la simulation */
 		while (simulationTime != 0) {
@@ -166,8 +166,10 @@ public class Simulation {
 				break;
 			// Ecriture en fichier des param�tres de la simulation
 			try {
-				fileOut.write("op1 rep = " + op1.getReputation() + " op2 rep = " + op2.getReputation()
-						+ System.lineSeparator());
+				for (int i = 0; i < listOperators.size(); ++i) {
+					fileOut.write("op" + (i + 1) + " rep = " + Main.listOp.get(i).getReputation() + " ");
+				}
+				fileOut.write(System.lineSeparator());
 				fileOut.flush();
 			} catch (IOException e1) {
 				e1.printStackTrace();

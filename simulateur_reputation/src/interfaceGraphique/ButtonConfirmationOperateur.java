@@ -27,10 +27,10 @@ public class ButtonConfirmationOperateur extends AbstractAction {
 
 		operateur = new Operator(valeurCap, valeurReput);
 
-		Main.listOperators.add(operateur);
+		Main.listOp.add(operateur);
 
 		InterfaceGraphique2.setClientEtOperateur(InterfaceGraphique2.getClientEtoperateur() + "Operateur"
-				+ Main.listOperators.size() + " : Capacite de l'operateur " + operateur.getMaxCapacity()
+				+ Main.listOp.size() + " : Capacite de l'operateur " + operateur.getMaxCapacity()
 				+ "     Reputation de l'operateur " + operateur.getReputation() + "\n");
 		fenetreInfoOperateur.setVisible(false);
 
