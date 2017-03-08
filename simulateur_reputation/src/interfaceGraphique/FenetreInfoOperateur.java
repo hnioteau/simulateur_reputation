@@ -27,7 +27,7 @@ public class FenetreInfoOperateur extends JFrame {
 	}
 
 	private void build() {
-		setTitle("Info client");
+		setTitle("Info opérateur");
 		setSize(400, 200);
 		setResizable(false);
 		setContentPane(buildContentPane());
@@ -48,7 +48,7 @@ public class FenetreInfoOperateur extends JFrame {
 		valeurCapacite.setText("10000");
 		panel.add(valeurCapacite);
 
-		reputation = new JLabel("Duree de la requete");
+		reputation = new JLabel("Réputation");
 		panel.add(reputation);
 
 		reput = new JTextField();

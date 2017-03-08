@@ -51,12 +51,12 @@ public class InterfaceGraphique2 extends JFrame {
 		
 		useCase = new JLabel();
 		if(Main.simulation.getUseCase() == 0)
-			getUseCase().setText("Tous les opérateurs sont éligible");
+			useCase.setText("Tous les opérateurs sont éligible");
 		if(Main.simulation.getUseCase() == 1)
-			getUseCase().setText("seul les opérateurs qui ont assez de capacité sont éligible");
-		panel.add(getUseCase());
+			useCase.setText("seul les opérateurs qui ont assez de capacité sont éligible");
+		panel.add(useCase);
 
-		clientEtOperateur = new JTextArea();
+		clientEtOperateur = new JTextArea("\n");
 		clientEtOperateur.setEditable(false);
 		clientEtOperateur.setOpaque(false);
 		panel.add(clientEtOperateur);
@@ -72,11 +72,11 @@ public class InterfaceGraphique2 extends JFrame {
 		return clientEtOperateur.getText();
 	}
 
-	public static JLabel getUseCase() {
+ static JLabel getUseCase() {
 		return useCase;
 	}
 
-	public static void setUseCase(String string) {
+ static void setUseCase(String string) {
 		useCase.setText(string);
 	}
 }

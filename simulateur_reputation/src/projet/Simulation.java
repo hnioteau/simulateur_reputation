@@ -53,7 +53,7 @@ public class Simulation {
 		double sum = 0;
 
 		for (int i = 0; i < listOperators.size(); i++) {
-			if (getUseCase() == 0 || (getUseCase() == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
+			if (useCase == 0 || (useCase == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
 				sum += listOperators.get(i).getReputation();
 			}
 		}
@@ -90,9 +90,9 @@ public class Simulation {
 		// l'operateur.
 		double opChoice = Math.random() * (sumReputation);
 		double sum = 0;
-
+		System.out.println(useCase);
 		while (i < listOperators.size() && chosenOp == null) {
-			if (getUseCase() == 0 || (getUseCase() == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
+			if (useCase == 0 || (useCase == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
 				sum += listOperators.get(i).getReputation();
 				if (opChoice < sum) {
 					chosenOp = listOperators.get(i);
@@ -151,8 +151,28 @@ public class Simulation {
 		// listOp.add(op2);
 		addOperators(Main.listOp);
 
+		// Ecriture en fichier des param�tres de la simulation
+		try {
+			for (int i = 0; i < listOperators.size(); ++i) {
+				fileOut.write("op" + (i + 1) + " rep = " + Main.listOp.get(i).getReputation() + " ");
+			}
+			fileOut.write(System.lineSeparator());
+			fileOut.flush();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		/* Lancement de la simulation */
 		while (simulationTime != 0) {
+			// Ecriture en fichier des param�tres de la simulation
+			try {
+				for (int i = 0; i < listOperators.size(); ++i) {
+					fileOut.write("op" + (i + 1) + " rep = " + Main.listOp.get(i).getReputation() + " ");
+				}
+				fileOut.write(System.lineSeparator());
+				fileOut.flush();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			// Verification, pour chaque operateur, du temps restant pour les
 			// requetes.
 			for (int i = 0; i < listOperators.size(); ++i) {
@@ -164,22 +184,14 @@ public class Simulation {
 				requestTreatment(client, chosenOp);
 			else
 				break;
-			// Ecriture en fichier des param�tres de la simulation
-			try {
-				for (int i = 0; i < listOperators.size(); ++i) {
-					fileOut.write("op" + (i + 1) + " rep = " + Main.listOp.get(i).getReputation() + " ");
-				}
-				fileOut.write(System.lineSeparator());
-				fileOut.flush();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
 
 			--simulationTime;
 		}
 		// On r�initialise les param�tres pour la prochaine simulation.
 		listOperators.clear();
 		setSumReputation(0);
+		for (int i = 0; i < Main.listOp.size(); ++i)
+			Main.listOp.get(i).setReputation(Main.listOp.get(i).getReputationInit());
 
 		// Fermeture du fichier
 		try {
@@ -211,6 +223,7 @@ public class Simulation {
 	}
 
 	public void setUseCase(int useCase) {
+		System.out.println("salut " + useCase);
 		this.useCase = useCase;
 	}
 }

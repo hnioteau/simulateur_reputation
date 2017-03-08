@@ -15,7 +15,6 @@ public class ButtonSimulation extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Main.simulation = new Simulation();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				Main.simulation.setSimulationTime(20);

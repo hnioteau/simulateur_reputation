@@ -3,116 +3,129 @@ package projet;
 import java.util.ArrayList;
 
 public class Operator {
-	private int maxCapacity; //capacite maximal
-	private int capacity; //capacite actuel
+	private int maxCapacity; // capacite maximal
+	private int capacity; // capacite actuel
+	private double reputationInit;
 	private double reputation;
-	private static double repFactor = 0.5; // facteur de la formule de modification de reputation
-	private ArrayList<Client> listRequests = new ArrayList<Client>(); //ensemble des requetes en cours d'execution par l'operateur
-	
-	
+	private static double repFactor = 0.5; // facteur de la formule de
+											// modification de reputation
+	private ArrayList<Client> listRequests = new ArrayList<Client>(); // ensemble
+																		// des
+																		// requetes
+																		// en
+																		// cours
+																		// d'execution
+																		// par
+																		// l'operateur
+
 	/*
 	 * Constructeur de la classe.
 	 */
-	public Operator(int capa, double rep){
+	public Operator(int capa, double rep) {
 		setMaxCapacity(capa);
 		setCapacity(capa);
+		setReputationInit(rep);
 		setReputation(rep);
 	}
-	
-	
+
 	/*
-	 * Getters et setters pour les attributes de la classe.
+	 * Getters et setters pour les attributs de la classe.
 	 */
 	public double getReputation() {
 		return reputation;
 	}
-	
+
 	public void setReputation(double rep) {
-		if(rep <= 1 && rep >= 0)
+		if (rep <= 1 && rep >= 0)
 			this.reputation = rep;
 	}
-	
+
+	public double getReputationInit() {
+		return reputationInit;
+	}
+
+	public void setReputationInit(double rep) {
+		if (rep <= 1 && rep >= 0)
+			reputationInit = rep;
+	}
+
 	public int getCapacity() {
 		return capacity;
 	}
-	
+
 	public void setCapacity(int cap) {
-		if(cap <= this.maxCapacity && cap >= 0)
+		if (cap <= this.maxCapacity && cap >= 0)
 			this.capacity = cap;
 	}
-	
+
 	public int getMaxCapacity() {
 		return maxCapacity;
 	}
-	
+
 	public void setMaxCapacity(int maxCap) {
 		this.maxCapacity = maxCap;
 	}
-	
+
 	public ArrayList<Client> getListRequests() {
 		return listRequests;
 	}
-	
+
 	public void setListRequests(ArrayList<Client> listReq) {
 		int i;
 		int sumCap = 0;
-		
-		for(i = 0 ; i < listReq.size() ; i++) {
+
+		for (i = 0; i < listReq.size(); i++) {
 			sumCap += listReq.get(i).getWeight();
 		}
-		
-		if(sumCap <= this.maxCapacity)
+
+		if (sumCap <= this.maxCapacity)
 			this.listRequests = listReq;
 	}
-	
-	
+
 	/*
 	 * Ajout d'une nouvelle requete � la liste.
 	 */
-	public void addRequest (Client client) {
+	public void addRequest(Client client) {
 		getListRequests().add(client);
 		setCapacity(getCapacity() - client.getWeight());
 	}
-	
-	
+
 	/*
 	 * Modifie la reputation de l'operateur suite � l'echec d'une requete.
 	 */
-	public void setRepSuccess(){
-		reputation = repFactor*reputation+(1-repFactor);
+	public void setRepSuccess() {
+		reputation = repFactor * reputation + (1 - repFactor);
 	}
-	
+
 	/*
 	 * Modifie la reputation de l'operateur suite � la reussite d'une requete.
 	 */
-	public void setRepFailed(){
-		reputation = repFactor*reputation;
+	public void setRepFailed() {
+		reputation = repFactor * reputation;
 	}
-	
-	
+
 	/*
 	 * Calcule la probabilite d'echec de l'operateur.
 	 */
-	public double failChance(){
-		return 1-((double) capacity/(double) maxCapacity);
+	public double failChance() {
+		return 1 - ((double) capacity / (double) maxCapacity);
 	}
-	
-	
+
 	/*
-	 *  Verifie l'�tat des requetes. Si une requete atteint 0 de dur�e,
-	 *  la supprime de la liste des requetes.
-	*/
-	public void checkRequestsState(){
-		for(int j = 0; j < getListRequests().size(); j++){
+	 * Verifie l'�tat des requetes. Si une requete atteint 0 de dur�e, la
+	 * supprime de la liste des requetes.
+	 */
+	public void checkRequestsState() {
+		for (int j = 0; j < getListRequests().size(); j++) {
 			Client client = getListRequests().get(j);
 			int reqTime = client.getDuration();
 			client.setDuration(reqTime - 1);
-			
-			if (client.getDuration() == 0){
+
+			if (client.getDuration() == 0) {
 				getListRequests().remove(j);
-				setCapacity(getCapacity()+client.getWeight());
+				setCapacity(getCapacity() + client.getWeight());
 			}
 		}
 	}
-	
+
 }

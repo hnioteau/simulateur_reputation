@@ -8,6 +8,8 @@ import projet.Main;
 
 public class ButtonConfirmationClient extends AbstractAction {
 	private FenetreInfoClient fenetreInfoClient;
+	String textClient;
+	String textClient2;
 
 	public ButtonConfirmationClient(FenetreInfoClient fenetreInfoClient, String string) {
 		super(string);
@@ -24,8 +26,16 @@ public class ButtonConfirmationClient extends AbstractAction {
 		int valeurDuree = Integer.parseInt(valeurDureeRequete);
 		Main.client.setDuration(valeurDuree);
 
-		InterfaceGraphique2.setClientEtOperateur("Client : Duree de la requete " + Main.client.getDuration()
-				+ "     Taille de la requete " + Main.client.getWeight() + "\n" + InterfaceGraphique2.getClientEtoperateur());
+		textClient = InterfaceGraphique2.getClientEtoperateur();
+		textClient2 = textClient.substring(textClient.indexOf("\n"), textClient.length());
+		textClient = "Client : Duree de la requete " + Main.client.getDuration() + "     Taille de la requete "
+				+ Main.client.getWeight() + textClient2;
+		InterfaceGraphique2.setClientEtOperateur(textClient);
+		// InterfaceGraphique2.setClientEtOperateur(
+		// "Client : Duree de la requete " + Main.client.getDuration() + "
+		// Taille de la requete "
+		// + Main.client.getWeight() + "\n" +
+		// InterfaceGraphique2.getClientEtoperateur());
 		fenetreInfoClient.setVisible(false);
 
 	}
