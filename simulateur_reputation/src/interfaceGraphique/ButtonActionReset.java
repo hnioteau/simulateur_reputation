@@ -6,20 +6,18 @@ import javax.swing.AbstractAction;
 import javax.swing.SwingUtilities;
 
 import projet.Main;
-import projet.Simulation;
 
-public class ButtonSimulation extends AbstractAction {
+public class ButtonActionReset extends AbstractAction {
 
-	public ButtonSimulation(InterfaceGraphique2 interfacegraphique, String texte) {
+	public ButtonActionReset(InterfaceGraphique2 interfacegraphique, String texte) {
 		super(texte);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Main.simulation = new Simulation();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				Main.simulation.setSimulationTime(20);
-		    	Main.simulation.runSimulation();
+				InterfaceGraphique2.setClientEtOperateur("");
+				Main.listOp.clear();
 			}
 		});
 	}

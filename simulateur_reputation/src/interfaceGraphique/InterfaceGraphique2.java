@@ -5,11 +5,15 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import projet.Main;
+
 public class InterfaceGraphique2 extends JFrame {
 	private static JTextArea clientEtOperateur;
+	private static JLabel useCase;
 
 	public InterfaceGraphique2() {
 		super();
@@ -30,7 +34,7 @@ public class InterfaceGraphique2 extends JFrame {
 		panel.setLayout(new FlowLayout());
 		panel.setBackground(Color.white);
 
-		JButton btnNewButton = new JButton("Creer canneva");
+		JButton btnNewButton = new JButton(new ButtonActionReset(this, "Reset simulation"));
 		panel.add(btnNewButton);
 
 		JButton btnAffClient = new JButton(new ButtonActionClient(this, "Afficher client"));
@@ -38,14 +42,23 @@ public class InterfaceGraphique2 extends JFrame {
 
 		JButton btnAffOperateur = new JButton(new ButtonActionOperateur(this, "Afficher operateur"));
 		panel.add(btnAffOperateur);
+		
+		JButton btnChangeCas = new JButton(new ButtonActionCas(this, "Changer cas"));
+		panel.add(btnChangeCas);
 
 		JButton btnStartSim = new JButton(new ButtonSimulation(this, "Lancer simulation"));
 		panel.add(btnStartSim);
+		
+		useCase = new JLabel();
+		if(Main.simulation.getUseCase() == 0)
+			getUseCase().setText("Tous les opérateurs sont éligible");
+		if(Main.simulation.getUseCase() == 1)
+			getUseCase().setText("seul les opérateurs qui ont assez de capacité sont éligible");
+		panel.add(getUseCase());
 
 		clientEtOperateur = new JTextArea();
 		clientEtOperateur.setEditable(false);
 		clientEtOperateur.setOpaque(false);
-		;
 		panel.add(clientEtOperateur);
 
 		return panel;
@@ -57,5 +70,13 @@ public class InterfaceGraphique2 extends JFrame {
 	
 	static String getClientEtoperateur(){
 		return clientEtOperateur.getText();
+	}
+
+	public static JLabel getUseCase() {
+		return useCase;
+	}
+
+	public static void setUseCase(String string) {
+		useCase.setText(string);
 	}
 }

@@ -9,7 +9,8 @@ import interfaceGraphique.InterfaceGraphique2;
 public class Main {
 	public static Client client = new Client();
 	public static ArrayList<Operator> listOp = new ArrayList<Operator>();
-
+	public static Simulation simulation = new Simulation();
+	
 	public static void main(String[] args) {
 		// InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
 		// interfaceGraphique.setTitle("Simulateur Reputation");

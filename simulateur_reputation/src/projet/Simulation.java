@@ -12,7 +12,7 @@ public class Simulation {
 	private ArrayList<Operator> listOperators = new ArrayList<Operator>();
 	private double sumReputation;
 	private int simulationTime;
-	int useCase = 0;
+	private int useCase = 0;
 	Client client = new Client();
 	final int DEFAULT_TIME = 20;
 	final String FILE_NAME = "results.txt";
@@ -53,7 +53,7 @@ public class Simulation {
 		double sum = 0;
 
 		for (int i = 0; i < listOperators.size(); i++) {
-			if (useCase == 0 || (useCase == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
+			if (getUseCase() == 0 || (getUseCase() == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
 				sum += listOperators.get(i).getReputation();
 			}
 		}
@@ -92,7 +92,7 @@ public class Simulation {
 		double sum = 0;
 
 		while (i < listOperators.size() && chosenOp == null) {
-			if (useCase == 0 || (useCase == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
+			if (getUseCase() == 0 || (getUseCase() == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
 				sum += listOperators.get(i).getReputation();
 				if (opChoice < sum) {
 					chosenOp = listOperators.get(i);
@@ -204,5 +204,13 @@ public class Simulation {
 		} else {
 			System.out.println("La fonction Desktop n'est pas supportée par votre Système d'exploitation");
 		}
+	}
+
+	public int getUseCase() {
+		return useCase;
+	}
+
+	public void setUseCase(int useCase) {
+		this.useCase = useCase;
 	}
 }
