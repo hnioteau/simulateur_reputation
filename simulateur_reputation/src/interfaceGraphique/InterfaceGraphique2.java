@@ -53,10 +53,11 @@ public class InterfaceGraphique2 extends JFrame {
 		if(Main.simulation.getUseCase() == 0)
 			useCase.setText("Tous les opérateurs sont éligible");
 		if(Main.simulation.getUseCase() == 1)
-			useCase.setText("seul les opérateurs qui ont assez de capacité sont éligible");
+			useCase.setText("Seul les opérateurs qui ont assez de capacité sont éligible");
 		panel.add(useCase);
 
-		clientEtOperateur = new JTextArea("\n");
+		clientEtOperateur = new JTextArea("Client : Duree de la requete " + Main.client.getDuration()
+				+ "     Taille de la requete " + Main.client.getWeight() + "\n");
 		clientEtOperateur.setEditable(false);
 		clientEtOperateur.setOpaque(false);
 		panel.add(clientEtOperateur);

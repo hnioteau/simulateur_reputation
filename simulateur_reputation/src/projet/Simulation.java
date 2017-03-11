@@ -90,7 +90,6 @@ public class Simulation {
 		// l'operateur.
 		double opChoice = Math.random() * (sumReputation);
 		double sum = 0;
-		System.out.println(useCase);
 		while (i < listOperators.size() && chosenOp == null) {
 			if (useCase == 0 || (useCase == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
 				sum += listOperators.get(i).getReputation();
@@ -130,10 +129,10 @@ public class Simulation {
 		// ArrayList<Operator> listOp = new ArrayList<Operator>();
 		Operator chosenOp;
 		// Initialisation des valeurs par defaut.
-		final int DEFAULT_CAP1 = 10000;
-		final int DEFAULT_CAP2 = 5000;
-		final double DEFAULT_REP1 = 0.6;
-		final double DEFAULT_REP2 = 0.8;
+		// final int DEFAULT_CAP1 = 10000;
+		// final int DEFAULT_CAP2 = 5000;
+		// final double DEFAULT_REP1 = 0.6;
+		// final double DEFAULT_REP2 = 0.8;
 
 		// Initialisation de l'entr�e/sortie fichier.
 		OutputStreamWriter fileOut = null;
@@ -223,7 +222,6 @@ public class Simulation {
 	}
 
 	public void setUseCase(int useCase) {
-		System.out.println("salut " + useCase);
 		this.useCase = useCase;
 	}
 }

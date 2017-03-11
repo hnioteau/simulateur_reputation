@@ -31,11 +31,6 @@ public class ButtonConfirmationClient extends AbstractAction {
 		textClient = "Client : Duree de la requete " + Main.client.getDuration() + "     Taille de la requete "
 				+ Main.client.getWeight() + textClient2;
 		InterfaceGraphique2.setClientEtOperateur(textClient);
-		// InterfaceGraphique2.setClientEtOperateur(
-		// "Client : Duree de la requete " + Main.client.getDuration() + "
-		// Taille de la requete "
-		// + Main.client.getWeight() + "\n" +
-		// InterfaceGraphique2.getClientEtoperateur());
 		fenetreInfoClient.setVisible(false);
 
 	}

@@ -16,7 +16,8 @@ public class ButtonActionReset extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				InterfaceGraphique2.setClientEtOperateur("");
+				InterfaceGraphique2.setClientEtOperateur("Client : Duree de la requete " + Main.client.getDuration()
+						+ "     Taille de la requete " + Main.client.getWeight()+ "\n");
 				Main.listOp.clear();
 			}
 		});
