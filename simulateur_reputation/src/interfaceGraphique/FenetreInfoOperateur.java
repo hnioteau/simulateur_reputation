@@ -15,11 +15,17 @@ public class FenetreInfoOperateur extends JFrame {
 	/**
 	 * 
 	 */
+	private JLabel nomOp;
+	private JTextField nomOperator;
+
 	private JLabel valCapacite;
 	private JTextField valeurCapacite;
 
 	private JLabel reputation;
 	private JTextField reput;
+
+	private JLabel probEchec;
+	private JTextField probabiliteEchec;
 
 	public FenetreInfoOperateur() {
 		super();
@@ -34,11 +40,18 @@ public class FenetreInfoOperateur extends JFrame {
 
 	}
 
-
 	private JPanel buildContentPane() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
 		panel.setBackground(Color.white);
+
+		nomOp = new JLabel("Nom de l'opérateur");
+		panel.add(nomOp);
+
+		nomOperator = new JTextField();
+		nomOperator.setColumns(10);
+		nomOperator.setText("Operateur" + Main.listOp.size());
+		panel.add(nomOperator);
 
 		valCapacite = new JLabel("Capacite de l'operateur");
 		panel.add(valCapacite);
@@ -56,6 +69,16 @@ public class FenetreInfoOperateur extends JFrame {
 		reput.setText("0.5");
 		panel.add(reput);
 
+		if (Main.simulation.getProbaEchecCase() == 1) {
+			probEchec = new JLabel("Probilité échec");
+			panel.add(probEchec);
+
+			probabiliteEchec = new JTextField();
+			probabiliteEchec.setColumns(10);
+			probabiliteEchec.setText("0.5");
+			panel.add(probabiliteEchec);
+		}
+
 		JButton confirmation = new JButton(new ButtonConfirmationOperateur(this, "Ok"));
 		panel.add(confirmation);
 
@@ -68,5 +91,13 @@ public class FenetreInfoOperateur extends JFrame {
 
 	public JTextField getReputation() {
 		return reput;
+	}
+
+	public JTextField getNomOperateur() {
+		return nomOperator;
+	}
+
+	public JTextField getProbaEchec() {
+		return probabiliteEchec;
 	}
 }

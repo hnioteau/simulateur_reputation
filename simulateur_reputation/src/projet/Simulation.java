@@ -13,8 +13,11 @@ public class Simulation {
 	private double sumReputation;
 	private int simulationTime;
 	private int useCase = 0;
+	private int probaEchecCase = 0;
 	Client client = new Client();
 	final int DEFAULT_TIME = 20;
+	private static double repFactor = 0.5; // facteur de la formule de
+	// modification de reputation
 	final String FILE_NAME = "results.txt";
 
 	/*
@@ -111,12 +114,20 @@ public class Simulation {
 	 */
 	public void requestTreatment(Client client, Operator operator) {
 		double failure = Math.random();
-
-		if (client.getWeight() > operator.getCapacity() || failure <= operator.failChance()) {
-			operator.setRepFailed();
+		if (probaEchecCase == 0) {
+			if (client.getWeight() > operator.getCapacity() || failure <= operator.failChance()) {
+				operator.setRepFailed();
+			} else {
+				operator.setRepSuccess();
+				operator.addRequest(client.copyClient());
+			}
 		} else {
-			operator.setRepSuccess();
-			operator.addRequest(client.copyClient());
+			if (client.getWeight() > operator.getCapacity() || failure <= operator.getProbaEchecfixe()) {
+				operator.setRepFailed();
+			} else {
+				operator.setRepSuccess();
+				operator.addRequest(client.copyClient());
+			}
 		}
 
 		updateSumReputation();
@@ -126,13 +137,7 @@ public class Simulation {
 	 * Lancement de la boucle de simulation.
 	 */
 	public void runSimulation() {
-		// ArrayList<Operator> listOp = new ArrayList<Operator>();
 		Operator chosenOp;
-		// Initialisation des valeurs par defaut.
-		// final int DEFAULT_CAP1 = 10000;
-		// final int DEFAULT_CAP2 = 5000;
-		// final double DEFAULT_REP1 = 0.6;
-		// final double DEFAULT_REP2 = 0.8;
 
 		// Initialisation de l'entr�e/sortie fichier.
 		OutputStreamWriter fileOut = null;
@@ -142,30 +147,15 @@ public class Simulation {
 			e.printStackTrace();
 		}
 
-		// Creation des operateurs et du client.
-		// Operator op1 = new Operator(DEFAULT_CAP1, DEFAULT_REP1);
-		// Operator op2 = new Operator(DEFAULT_CAP2, DEFAULT_REP2);
-		// Client client = new Client();
-		// listOp.add(op1);
-		// listOp.add(op2);
 		addOperators(Main.listOp);
 
-		// Ecriture en fichier des param�tres de la simulation
-		try {
-			for (int i = 0; i < listOperators.size(); ++i) {
-				fileOut.write("op" + (i + 1) + " rep = " + Main.listOp.get(i).getReputation() + " ");
-			}
-			fileOut.write(System.lineSeparator());
-			fileOut.flush();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		/* Lancement de la simulation */
 		while (simulationTime != 0) {
 			// Ecriture en fichier des param�tres de la simulation
 			try {
 				for (int i = 0; i < listOperators.size(); ++i) {
-					fileOut.write("op" + (i + 1) + " rep = " + Main.listOp.get(i).getReputation() + " ");
+					fileOut.write(
+							listOperators.get(i).getName() + " rep = " + Main.listOp.get(i).getReputation() + " ");
 				}
 				fileOut.write(System.lineSeparator());
 				fileOut.flush();
@@ -223,5 +213,21 @@ public class Simulation {
 
 	public void setUseCase(int useCase) {
 		this.useCase = useCase;
+	}
+
+	public static double getRepFactor() {
+		return repFactor;
+	}
+
+	public static void setRepFactor(double repFactor) {
+		Simulation.repFactor = repFactor;
+	}
+
+	public int getProbaEchecCase() {
+		return probaEchecCase;
+	}
+
+	public void setProbaEchecCase(int probaEchecCase) {
+		this.probaEchecCase = probaEchecCase;
 	}
 }

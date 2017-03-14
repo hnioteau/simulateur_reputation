@@ -24,8 +24,8 @@ public class TestChoixOperator {
 
 	@Before
 	public void setUp() throws Exception {
-		op1 = new Operator(5000, 0.5);
-		op2 = new Operator(10000, 0.6);
+		op1 = new Operator("op1", 5000, 0.5);
+		op2 = new Operator("op2", 10000, 0.6);
 		client = new Client();
 		listOperators = new ArrayList<Operator>();
 

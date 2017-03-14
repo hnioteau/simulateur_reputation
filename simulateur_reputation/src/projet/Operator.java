@@ -3,12 +3,13 @@ package projet;
 import java.util.ArrayList;
 
 public class Operator {
+	private String name;
 	private int maxCapacity; // capacite maximal
 	private int capacity; // capacite actuel
 	private double reputationInit;
 	private double reputation;
-	private static double repFactor = 0.5; // facteur de la formule de
-											// modification de reputation
+	private double probaEchecfixe = 0.5;
+
 	private ArrayList<Client> listRequests = new ArrayList<Client>(); // ensemble
 																		// des
 																		// requetes
@@ -21,7 +22,8 @@ public class Operator {
 	/*
 	 * Constructeur de la classe.
 	 */
-	public Operator(int capa, double rep) {
+	public Operator(String name, int capa, double rep) {
+		setName(name);
 		setMaxCapacity(capa);
 		setCapacity(capa);
 		setReputationInit(rep);
@@ -94,14 +96,14 @@ public class Operator {
 	 * Modifie la reputation de l'operateur suite � l'echec d'une requete.
 	 */
 	public void setRepSuccess() {
-		reputation = repFactor * reputation + (1 - repFactor);
+		reputation = Main.simulation.getRepFactor() * reputation + (1 - Main.simulation.getRepFactor());
 	}
 
 	/*
 	 * Modifie la reputation de l'operateur suite � la reussite d'une requete.
 	 */
 	public void setRepFailed() {
-		reputation = repFactor * reputation;
+		reputation = Main.simulation.getRepFactor() * reputation;
 	}
 
 	/*
@@ -126,6 +128,22 @@ public class Operator {
 				setCapacity(getCapacity() + client.getWeight());
 			}
 		}
+	}
+
+	public double getProbaEchecfixe() {
+		return probaEchecfixe;
+	}
+
+	public void setProbaEchecfixe(double probaEchecfixe) {
+		this.probaEchecfixe = probaEchecfixe;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

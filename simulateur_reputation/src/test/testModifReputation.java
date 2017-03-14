@@ -23,7 +23,7 @@ public class testModifReputation {
 
 	@Before
 	public void setUp() throws Exception {
-		op1 = new Operator(5000, 0.5);
+		op1 = new Operator("op1", 5000, 0.5);
 		client = new Client();
 		listOperators = new ArrayList<Operator>();
 
