@@ -16,6 +16,7 @@ public class InterfaceGraphique2 extends JFrame {
 	private static JLabel useCase;
 	private static JLabel echecCase;
 	private static JLabel timerSimulation;
+	private static JLabel valRho;
 
 	public InterfaceGraphique2() {
 		super();
@@ -54,9 +55,19 @@ public class InterfaceGraphique2 extends JFrame {
 
 		JButton btnSetTimer = new JButton(new ButtonSetTimer(this, "Durée de la simulation"));
 		panel.add(btnSetTimer);
+		
+		JButton btnSetRho = new JButton(new ButtonSetRho(this, "Modifier rho"));
+		panel.add(btnSetRho);
+		
+		JButton btnSetOperator = new JButton(new ButtonSetOperator(this, "Modifier opérateur"));
+		panel.add(btnSetOperator);
 
 		JButton btnStartSim = new JButton(new ButtonSimulation(this, "Lancer simulation"));
 		panel.add(btnStartSim);
+		
+		valRho = new JLabel();
+		valRho.setText("Valeur de rho : "+ Main.simulation.getRepFactor());
+		panel.add(valRho);
 
 		timerSimulation = new JLabel();
 		timerSimulation.setText("Durée de la simulation : " + Main.simulation.getSimulationTime());
@@ -105,11 +116,15 @@ public class InterfaceGraphique2 extends JFrame {
 		timerSimulation.setText(string);
 	}
 
-	public static JLabel getProbaCase() {
+	static JLabel getProbaCase() {
 		return echecCase;
 	}
 
-	public static void setProbaCase(JLabel echecCase) {
+	static void setProbaCase(JLabel echecCase) {
 		InterfaceGraphique2.echecCase = echecCase;
+	}
+	
+	static void setRho(String string){
+		valRho.setText(string);
 	}
 }

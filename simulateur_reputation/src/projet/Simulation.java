@@ -215,7 +215,7 @@ public class Simulation {
 		this.useCase = useCase;
 	}
 
-	public static double getRepFactor() {
+	public double getRepFactor() {
 		return repFactor;
 	}
 
