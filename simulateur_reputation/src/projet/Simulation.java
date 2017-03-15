@@ -138,6 +138,7 @@ public class Simulation {
 	 */
 	public void runSimulation() {
 		Operator chosenOp;
+		int tmp = simulationTime;
 
 		// Initialisation de l'entr�e/sortie fichier.
 		OutputStreamWriter fileOut = null;
@@ -176,9 +177,20 @@ public class Simulation {
 
 			--simulationTime;
 		}
+		// Ecriture en fichier des param�tres de la simulation
+		try {
+			for (int i = 0; i < listOperators.size(); ++i) {
+				fileOut.write(listOperators.get(i).getName() + " rep = " + Main.listOp.get(i).getReputation() + " ");
+			}
+			fileOut.write(System.lineSeparator());
+			fileOut.flush();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		// On r�initialise les param�tres pour la prochaine simulation.
 		listOperators.clear();
 		setSumReputation(0);
+		simulationTime = tmp;
 		for (int i = 0; i < Main.listOp.size(); ++i)
 			Main.listOp.get(i).setReputation(Main.listOp.get(i).getReputationInit());
 

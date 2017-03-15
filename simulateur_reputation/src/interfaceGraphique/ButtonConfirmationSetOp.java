@@ -23,7 +23,7 @@ public class ButtonConfirmationSetOp extends AbstractAction {
 		text2 = text.substring(0,text.indexOf("\n"));
 		InterfaceGraphique2.setClientEtOperateur(text2+ "\n");
 
-		for (int i = 0; i < Main.listOp.size(); ++i) {
+		/*for (int i = 0; i < Main.listOp.size(); ++i) {
 			String nomOp = fenetreInfoOp.getNomOperateur().getText();
 
 			String valeurCapacite = fenetreInfoOp.getValeurCapacite().getText();
@@ -52,7 +52,7 @@ public class ButtonConfirmationSetOp extends AbstractAction {
 						+ operateur.getReputation() + " probabilité d'échec " + operateur.getProbaEchecfixe() + "\n");
 
 			}
-		}
+		}*/
 		fenetreInfoOp.setVisible(false);
 
 	}
