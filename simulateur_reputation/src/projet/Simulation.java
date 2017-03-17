@@ -10,16 +10,17 @@ import java.util.ArrayList;
 
 public class Simulation {
 	private ArrayList<Operator> listOperators = new ArrayList<Operator>();
+	private Client client = new Client();
 	private double sumReputation;
 	private int simulationTime;
-	private int useCase = 0;
-	private int probaEchecCase = 0;
-	Client client = new Client();
-	final int DEFAULT_TIME = 20;
-	private static double repFactor = 0.5; // facteur de la formule de
-	// modification de reputation
-	final String FILE_NAME = "results.txt";
+	private int opChoiceCase = 0;
+	private int failChanceCase = 0;
+	private static double repFactor = 0.5; // facteur de la formule de modification de reputation
+	
+	private final int DEFAULT_TIME = 20;
+	private final String FILE_NAME = "results.txt";
 
+	
 	/*
 	 * Constructeur de la classe.
 	 */
@@ -49,6 +50,31 @@ public class Simulation {
 			this.simulationTime = simulationTime;
 	}
 
+	public double getRepFactor() {
+		return repFactor;
+	}
+
+	public static void setRepFactor(double repFactor) {
+		Simulation.repFactor = repFactor;
+	}
+	
+	public int getUseCase() {
+		return opChoiceCase;
+	}
+
+	public void setUseCase(int useCase) {
+		this.opChoiceCase = useCase;
+	}
+	
+	public int getProbaEchecCase() {
+		return failChanceCase;
+	}
+
+	public void setProbaEchecCase(int probaEchecCase) {
+		this.failChanceCase = probaEchecCase;
+	}
+	
+
 	/*
 	 * Mise a jour de la somme des reputations.
 	 */
@@ -56,78 +82,101 @@ public class Simulation {
 		double sum = 0;
 
 		for (int i = 0; i < listOperators.size(); i++) {
-			if (useCase == 0 || (useCase == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
 				sum += listOperators.get(i).getReputation();
-			}
 		}
 
 		setSumReputation(sum);
 	}
 
-	/*
-	 * Ajout d'un seul operateur � la liste et mise � jour de la somme des
-	 * reputations.
-	 */
-	public void addOperator(Operator operator) {
-		this.listOperators.add(operator);
-		this.sumReputation += operator.getReputation();
-	}
 
 	/*
-	 * Ajout d'un ensemble d'operateurs � la liste des operateurs.
+	 * Ajout d'un ensemble d'operateurs a la liste des operateurs.
 	 */
 	public void addOperators(ArrayList<Operator> listOperators) {
 		for (int i = 0; i < listOperators.size(); i++) {
-			addOperator(listOperators.get(i));
+			this.listOperators.add(listOperators.get(i));
+			this.sumReputation += listOperators.get(i).getReputation();
 		}
 	}
+	
+	
+	/*
+	 * Recupere tous les operateurs capables d'executer la requete.
+	 */
+	public ArrayList<Operator> getAvailalbleOperators (ArrayList<Operator> listOp) {
+		ArrayList<Operator> newList = new ArrayList<Operator>();
+		
+		for (int i = 0; i < listOp.size(); ++i) {
+				if (listOp.get(i).getCapacity() >= client.getWeight())
+					newList.add(listOp.get(i));
+		}
+		
+		return newList;
+	}
+	
 
 	/*
 	 * Choix de l'operateur qui prendra la requete.
 	 */
 	public Operator pickOperator() {
 		Operator chosenOp = null;
+		ArrayList<Operator> tmpList = new ArrayList<Operator>();
 		int i = 0;
-
-		// Tirage aleatoire (entre 0 et 'sumReputation') pour le choix de
-		// l'operateur.
-		double opChoice = Math.random() * (sumReputation);
 		double sum = 0;
-		while (i < listOperators.size() && chosenOp == null) {
-			if (useCase == 0 || (useCase == 1 && listOperators.get(i).getCapacity() >= client.getWeight())) {
-				sum += listOperators.get(i).getReputation();
-				if (opChoice < sum) {
-					chosenOp = listOperators.get(i);
-				}
+		double opChoice;
+		
+		if (opChoiceCase == 0) {
+			tmpList = listOperators;
+			opChoice = Math.random() * (sumReputation);
+		} else {
+			tmpList = getAvailalbleOperators(listOperators);
+			double tmp = 0;
+			for (int j = 0; j < tmpList.size(); j++) {
+				tmp += tmpList.get(i).getReputation();
 			}
+			opChoice = Math.random() * (tmp);
+		}
+		
+		while (i < tmpList.size() && chosenOp == null) {
+			sum += tmpList.get(i).getReputation();
+			if (opChoice < sum)
+				chosenOp = tmpList.get(i);
+			
 			i++;
 		}
+		
 		if (chosenOp == null) {
-			System.out.println("Aucun opérateur ne peut accepter la requete");
 			return null;
 		}
+		
 		return chosenOp;
 	}
 
+	
 	/*
 	 * Modification de la reputation et ajout de la requete en cas de reussite.
 	 */
 	public void requestTreatment(Client client, Operator operator) {
 		double failure = Math.random();
-		if (probaEchecCase == 0) {
+		
+		if (failChanceCase == 0) {
+			
 			if (client.getWeight() > operator.getCapacity() || failure <= operator.failChance()) {
 				operator.setRepFailed();
 			} else {
 				operator.setRepSuccess();
 				operator.addRequest(client.copyClient());
 			}
+			
 		} else {
+			
 			if (client.getWeight() > operator.getCapacity() || failure <= operator.getProbaEchecfixe()) {
 				operator.setRepFailed();
 			} else {
 				operator.setRepSuccess();
 				operator.addRequest(client.copyClient());
 			}
+			
 		}
 
 		updateSumReputation();
@@ -140,7 +189,7 @@ public class Simulation {
 		Operator chosenOp;
 		int tmp = simulationTime;
 
-		// Initialisation de l'entr�e/sortie fichier.
+		// Initialisation de l'entree/sortie fichier.
 		OutputStreamWriter fileOut = null;
 		try {
 			fileOut = new OutputStreamWriter(new FileOutputStream(new File(FILE_NAME)));
@@ -152,7 +201,7 @@ public class Simulation {
 
 		/* Lancement de la simulation */
 		while (simulationTime != 0) {
-			// Ecriture en fichier des param�tres de la simulation
+			// Ecriture en fichier des parametres de la simulation
 			try {
 				for (int i = 0; i < listOperators.size(); ++i) {
 					fileOut.write(
@@ -163,12 +212,14 @@ public class Simulation {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			// Verification, pour chaque operateur, du temps restant pour les
-			// requetes.
+			
+			
+			// Verification, pour chaque operateur, du temps restant pour les requetes.
 			for (int i = 0; i < listOperators.size(); ++i) {
 				listOperators.get(i).checkRequestsState();
 			}
 
+			// Choix de l'operateur par le client.
 			chosenOp = pickOperator();
 			if (chosenOp != null)
 				requestTreatment(client, chosenOp);
@@ -177,7 +228,9 @@ public class Simulation {
 
 			--simulationTime;
 		}
-		// Ecriture en fichier des param�tres de la simulation
+		
+		
+		// Ecriture en fichier des parametres de la simulation
 		try {
 			for (int i = 0; i < listOperators.size(); ++i) {
 				fileOut.write(listOperators.get(i).getName() + " rep = " + Main.listOp.get(i).getReputation() + " ");
@@ -187,7 +240,9 @@ public class Simulation {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		// On r�initialise les param�tres pour la prochaine simulation.
+		
+		
+		// On reinitialise les parametres pour la prochaine simulation.
 		listOperators.clear();
 		setSumReputation(0);
 		simulationTime = tmp;
@@ -217,29 +272,5 @@ public class Simulation {
 		} else {
 			System.out.println("La fonction Desktop n'est pas supportée par votre Système d'exploitation");
 		}
-	}
-
-	public int getUseCase() {
-		return useCase;
-	}
-
-	public void setUseCase(int useCase) {
-		this.useCase = useCase;
-	}
-
-	public double getRepFactor() {
-		return repFactor;
-	}
-
-	public static void setRepFactor(double repFactor) {
-		Simulation.repFactor = repFactor;
-	}
-
-	public int getProbaEchecCase() {
-		return probaEchecCase;
-	}
-
-	public void setProbaEchecCase(int probaEchecCase) {
-		this.probaEchecCase = probaEchecCase;
 	}
 }

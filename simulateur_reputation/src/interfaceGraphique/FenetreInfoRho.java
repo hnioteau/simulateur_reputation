@@ -24,7 +24,7 @@ public class FenetreInfoRho extends JFrame {
 	}
 
 	private void build() {
-		setTitle("Valeu de rho");
+		setTitle("Valeur de rho");
 		setSize(400, 200);
 		setResizable(false);
 		setContentPane(buildContentPane());

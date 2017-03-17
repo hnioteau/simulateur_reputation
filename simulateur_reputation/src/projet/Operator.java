@@ -8,7 +8,7 @@ public class Operator {
 	private int capacity; // capacite actuel
 	private double reputationInit;
 	private double reputation;
-	private double probaEchecfixe = 0.5;
+	private double fixedFailChance = 0.5;
 
 	private ArrayList<Client> listRequests = new ArrayList<Client>(); // ensemble
 																		// des
@@ -67,6 +67,22 @@ public class Operator {
 	public void setMaxCapacity(int maxCap) {
 		this.maxCapacity = maxCap;
 	}
+	
+	public double getProbaEchecfixe() {
+		return fixedFailChance;
+	}
+
+	public void setProbaEchecfixe(double probaEchecfixe) {
+		this.fixedFailChance = probaEchecfixe;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public ArrayList<Client> getListRequests() {
 		return listRequests;
@@ -84,6 +100,7 @@ public class Operator {
 			this.listRequests = listReq;
 	}
 
+	
 	/*
 	 * Ajout d'une nouvelle requete � la liste.
 	 */
@@ -91,14 +108,16 @@ public class Operator {
 		getListRequests().add(client);
 		setCapacity(getCapacity() - client.getWeight());
 	}
+	
 
 	/*
-	 * Modifie la reputation de l'operateur suite � l'echec d'une requete.
+	 * Modifie la reputation de l'operateur suite a l'echec d'une requete.
 	 */
 	public void setRepSuccess() {
 		reputation = Main.simulation.getRepFactor() * reputation + (1 - Main.simulation.getRepFactor());
 	}
 
+	
 	/*
 	 * Modifie la reputation de l'operateur suite � la reussite d'une requete.
 	 */
@@ -106,6 +125,7 @@ public class Operator {
 		reputation = Main.simulation.getRepFactor() * reputation;
 	}
 
+	
 	/*
 	 * Calcule la probabilite d'echec de l'operateur.
 	 */
@@ -113,8 +133,9 @@ public class Operator {
 		return 1 - ((double) capacity / (double) maxCapacity);
 	}
 
+	
 	/*
-	 * Verifie l'�tat des requetes. Si une requete atteint 0 de dur�e, la
+	 * Verifie l'etat des requetes. Si une requete atteint 0 de duree, la
 	 * supprime de la liste des requetes.
 	 */
 	public void checkRequestsState() {
@@ -128,22 +149,6 @@ public class Operator {
 				setCapacity(getCapacity() + client.getWeight());
 			}
 		}
-	}
-
-	public double getProbaEchecfixe() {
-		return probaEchecfixe;
-	}
-
-	public void setProbaEchecfixe(double probaEchecfixe) {
-		this.probaEchecfixe = probaEchecfixe;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }

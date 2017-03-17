@@ -15,7 +15,7 @@ public class Client {
 		this.duration = DEFAULT_DURATION;
 	}
 
-	Client(int weight, int duration) {
+	public Client(int weight, int duration) {
 		setWeight(weight);
 		setDuration(duration);
 	}
