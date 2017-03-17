@@ -18,41 +18,64 @@ public class ButtonConfirmationSetOp extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		Operator operateur;
 		text = InterfaceGraphique2.getClientEtoperateur();
-		text2 = text.substring(0,text.indexOf("\n"));
-		InterfaceGraphique2.setClientEtOperateur(text2+ "\n");
+		text2 = text.substring(0, text.indexOf("\n"));
+		InterfaceGraphique2.setClientEtOperateur(text2 + "\n");
 
-		/*for (int i = 0; i < Main.listOp.size(); ++i) {
-			String nomOp = fenetreInfoOp.getNomOperateur().getText();
+		for (int i = 0; i < Main.listOp.size(); ++i) {
+			if (i == fenetreInfoOp.getOperateurChoisi()) {
+				String nomOp = fenetreInfoOp.getNomOperateur().getText();
+				Main.listOp.get(i).setName(nomOp);
 
-			String valeurCapacite = fenetreInfoOp.getValeurCapacite().getText();
-			int valeurCap = Integer.parseInt(valeurCapacite);
+				String valeurCapacite = fenetreInfoOp.getValeurCapacite().getText();
+				int valeurCap = Integer.parseInt(valeurCapacite);
+				Main.listOp.get(i).setCapacity(valeurCap);
+				Main.listOp.get(i).setMaxCapacity(valeurCap);
 
-			String valeurReputation = fenetreInfoOp.getReputation().getText();
-			double valeurReput = Double.parseDouble(valeurReputation);
+				String valeurReputation = fenetreInfoOp.getReputation().getText();
+				double valeurReput = Double.parseDouble(valeurReputation);
+				Main.listOp.get(i).setReputationInit(valeurReput);
+				Main.listOp.get(i).setReputation(valeurReput);
 
-			operateur = new Operator(nomOp, valeurCap, valeurReput);
+				if (Main.simulation.getProbaEchecCase() == 1) {
+					String valeurProbaEchec = fenetreInfoOp.getProbaEchec().getText();
+					double valeurProbabiliteEchec = Double.parseDouble(valeurProbaEchec);
+					Main.listOp.get(i).setProbaEchecfixe(valeurProbabiliteEchec);
+				}
 
-			if (Main.simulation.getProbaEchecCase() == 1) {
-				String valeurProbaEchec = fenetreInfoOp.getProbaEchec().getText();
-				double valeurProbabiliteEchec = Double.parseDouble(valeurProbaEchec);
-				operateur.setProbaEchecfixe(valeurProbabiliteEchec);
+				if (Main.simulation.getProbaEchecCase() == 0) {
+					InterfaceGraphique2.setClientEtOperateur(InterfaceGraphique2.getClientEtoperateur()
+							+ Main.listOp.get(i).getName() + " : Capacite de l'operateur "
+							+ Main.listOp.get(i).getMaxCapacity() + "     Reputation de l'operateur "
+							+ Main.listOp.get(i).getReputationInit() + "\n");
+				}
+
+				if (Main.simulation.getProbaEchecCase() == 1) {
+					InterfaceGraphique2.setClientEtOperateur(
+							InterfaceGraphique2.getClientEtoperateur() + Main.listOp.get(i).getName()
+									+ " : Capacite de l'operateur " + Main.listOp.get(i).getMaxCapacity()
+									+ "     Reputation de l'operateur " + Main.listOp.get(i).getReputationInit()
+									+ " probabilité d'échec " + Main.listOp.get(i).getProbaEchecfixe() + "\n");
+
+				}
+			} else {
+				if (Main.simulation.getProbaEchecCase() == 0) {
+					InterfaceGraphique2.setClientEtOperateur(InterfaceGraphique2.getClientEtoperateur()
+							+ Main.listOp.get(i).getName() + " : Capacite de l'operateur "
+							+ Main.listOp.get(i).getMaxCapacity() + "     Reputation de l'operateur "
+							+ Main.listOp.get(i).getReputationInit() + "\n");
+				}
+
+				if (Main.simulation.getProbaEchecCase() == 1) {
+					InterfaceGraphique2.setClientEtOperateur(
+							InterfaceGraphique2.getClientEtoperateur() + Main.listOp.get(i).getName()
+									+ " : Capacite de l'operateur " + Main.listOp.get(i).getMaxCapacity()
+									+ "     Reputation de l'operateur " + Main.listOp.get(i).getReputationInit()
+									+ " probabilité d'échec " + Main.listOp.get(i).getProbaEchecfixe() + "\n");
+
+				}
 			}
-
-			if (Main.simulation.getProbaEchecCase() == 0) {
-				InterfaceGraphique2.setClientEtOperateur(InterfaceGraphique2.getClientEtoperateur() + nomOp
-						+ " : Capacite de l'operateur " + operateur.getMaxCapacity() + "     Reputation de l'operateur "
-						+ operateur.getReputation() + "\n");
-			}
-
-			if (Main.simulation.getProbaEchecCase() == 1) {
-				InterfaceGraphique2.setClientEtOperateur(InterfaceGraphique2.getClientEtoperateur() + nomOp
-						+ " : Capacite de l'operateur " + operateur.getMaxCapacity() + "     Reputation de l'operateur "
-						+ operateur.getReputation() + " probabilité d'échec " + operateur.getProbaEchecfixe() + "\n");
-
-			}
-		}*/
+		}
 		fenetreInfoOp.setVisible(false);
 
 	}

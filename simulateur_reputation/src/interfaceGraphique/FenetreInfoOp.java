@@ -19,7 +19,7 @@ public class FenetreInfoOp extends JFrame {
 	/**
 	 * 
 	 */
-	//private JPanel grosPanel = new JPanel();
+	private int operateurChoisi = 0;
 	private JPanel panel;
 
 	private JComboBox<String> combo;
@@ -68,8 +68,6 @@ public class FenetreInfoOp extends JFrame {
 		combo.setPreferredSize(new Dimension(150, 20));
 		panel.add(combo);
 
-		//grosPanel.add(panel);
-		
 		JButton confirmation = new JButton(new ButtonConfirmationSetOp(this, "Ok"));
 		panel.add(confirmation);
 
@@ -81,11 +79,13 @@ public class FenetreInfoOp extends JFrame {
 			JPanel jp = new JPanel();
 			jp.setLayout(new FlowLayout());
 			jp.setBackground(Color.white);
-			
+
 			int choixop = 0;
 			for (int i = 0; i < Main.listOp.size(); i++) {
-				if (Main.listOp.get(i).getName() == combo.getSelectedItem())
+				if (Main.listOp.get(i).getName() == combo.getSelectedItem()) {
 					choixop = i;
+					operateurChoisi = i;
+				}
 			}
 
 			nomOp = new JLabel("Nom de l'opérateur");
@@ -121,7 +121,7 @@ public class FenetreInfoOp extends JFrame {
 				probabiliteEchec.setText(Double.toString(Main.listOp.get(choixop).getProbaEchecfixe()));
 				panel.add(probabiliteEchec);
 			}
-			
+
 			panel.revalidate();
 			panel.repaint();
 		}
@@ -141,5 +141,13 @@ public class FenetreInfoOp extends JFrame {
 
 	public JTextField getProbaEchec() {
 		return probabiliteEchec;
+	}
+
+	public int getOperateurChoisi() {
+		return operateurChoisi;
+	}
+
+	public void setOperateurChoisi(int operateurChoisi) {
+		this.operateurChoisi = operateurChoisi;
 	}
 }
