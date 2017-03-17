@@ -101,7 +101,7 @@ public class FenetreInfoOp extends JFrame {
 
 			valeurCapacite = new JTextField();
 			valeurCapacite.setColumns(10);
-			valeurCapacite.setText(Integer.toString(Main.listOp.get(choixop).getCapacity()));
+			valeurCapacite.setText(Integer.toString(Main.listOp.get(choixop).getMaxCapacity()));
 			panel.add(valeurCapacite);
 
 			reputation = new JLabel("\nRéputation");
