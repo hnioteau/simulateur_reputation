@@ -81,8 +81,8 @@ public class Simulation {
 	public void updateSumReputation() {
 		double sum = 0;
 
-		for (int i = 0; i < listOperators.size(); i++) {
-				sum += listOperators.get(i).getReputation();
+		for (int i = 0; i < getListOperators().size(); i++) {
+				sum += getListOperators().get(i).getReputation();
 		}
 
 		setSumReputation(sum);
@@ -94,7 +94,7 @@ public class Simulation {
 	 */
 	public void addOperators(ArrayList<Operator> listOperators) {
 		for (int i = 0; i < listOperators.size(); i++) {
-			this.listOperators.add(listOperators.get(i));
+			this.getListOperators().add(listOperators.get(i));
 			this.sumReputation += listOperators.get(i).getReputation();
 		}
 	}
@@ -126,10 +126,10 @@ public class Simulation {
 		double opChoice;
 		
 		if (opChoiceCase == 0) {
-			tmpList = listOperators;
+			tmpList = getListOperators();
 			opChoice = Math.random() * (sumReputation);
 		} else {
-			tmpList = getAvailalbleOperators(listOperators);
+			tmpList = getAvailalbleOperators(getListOperators());
 			double tmp = 0;
 			for (int j = 0; j < tmpList.size(); j++) {
 				tmp += tmpList.get(i).getReputation();
@@ -203,9 +203,9 @@ public class Simulation {
 		while (simulationTime != 0) {
 			// Ecriture en fichier des parametres de la simulation
 			try {
-				for (int i = 0; i < listOperators.size(); ++i) {
+				for (int i = 0; i < getListOperators().size(); ++i) {
 					fileOut.write(
-							listOperators.get(i).getName() + " rep = " + Main.listOp.get(i).getReputation() + " ");
+							getListOperators().get(i).getName() + " rep = " + Main.listOp.get(i).getReputation() + " ");
 				}
 				fileOut.write(System.lineSeparator());
 				fileOut.flush();
@@ -215,8 +215,8 @@ public class Simulation {
 			
 			
 			// Verification, pour chaque operateur, du temps restant pour les requetes.
-			for (int i = 0; i < listOperators.size(); ++i) {
-				listOperators.get(i).checkRequestsState();
+			for (int i = 0; i < getListOperators().size(); ++i) {
+				getListOperators().get(i).checkRequestsState();
 			}
 
 			// Choix de l'operateur par le client.
@@ -232,8 +232,8 @@ public class Simulation {
 		
 		// Ecriture en fichier des parametres de la simulation
 		try {
-			for (int i = 0; i < listOperators.size(); ++i) {
-				fileOut.write(listOperators.get(i).getName() + " rep = " + Main.listOp.get(i).getReputation() + " ");
+			for (int i = 0; i < getListOperators().size(); ++i) {
+				fileOut.write(getListOperators().get(i).getName() + " rep = " + Main.listOp.get(i).getReputation() + " ");
 			}
 			fileOut.write(System.lineSeparator());
 			fileOut.flush();
@@ -243,7 +243,7 @@ public class Simulation {
 		
 		
 		// On reinitialise les parametres pour la prochaine simulation.
-		listOperators.clear();
+		getListOperators().clear();
 		setSumReputation(0);
 		simulationTime = tmp;
 		for (int i = 0; i < Main.listOp.size(); ++i)
@@ -272,5 +272,13 @@ public class Simulation {
 		} else {
 			System.out.println("La fonction Desktop n'est pas supportée par votre Système d'exploitation");
 		}
+	}
+
+	public ArrayList<Operator> getListOperators() {
+		return listOperators;
+	}
+
+	public void setListOperators(ArrayList<Operator> listOperators) {
+		this.listOperators = listOperators;
 	}
 }
