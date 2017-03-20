@@ -17,6 +17,7 @@ public class TestModifReputation {
 	protected double sumReputation = 0;
 	protected int simulationTime = 20;
 	protected Simulation simulation;
+	protected final double RHO = 0.5;
 
 	@Before
 	public void setUp() throws Exception {
@@ -43,11 +44,11 @@ public class TestModifReputation {
 			double op1RepTest = op1.getReputation();
 
 			if (client.getWeight() > op1.getCapacity() || failure <= op1.failChance()) {
-				op1RepTest = 0.5 * op1.getReputation();
+				op1RepTest = RHO * op1.getReputation();
 				op1.setRepFailed();
 
 			} else {
-				op1RepTest = 0.5 * op1.getReputation() + (1.0 - 0.5);
+				op1RepTest = RHO * op1.getReputation() + (1.0 - RHO);
 				op1.setRepSuccess();
 				op1.addRequest(client.copyClient());
 			}

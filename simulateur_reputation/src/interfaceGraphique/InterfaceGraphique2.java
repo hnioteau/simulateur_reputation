@@ -40,10 +40,10 @@ public class InterfaceGraphique2 extends JFrame {
 		JButton btnNewButton = new JButton(new ButtonActionReset(this, "Reset simulation"));
 		panel.add(btnNewButton);
 
-		JButton btnAffClient = new JButton(new ButtonActionClient(this, "Afficher client"));
+		JButton btnAffClient = new JButton(new ButtonActionClient(this, "Mofidier client"));
 		panel.add(btnAffClient);
 
-		JButton btnAffOperateur = new JButton(new ButtonActionOperateur(this, "Afficher operateur"));
+		JButton btnAffOperateur = new JButton(new ButtonActionOperateur(this, "Créer operateur"));
 		panel.add(btnAffOperateur);
 
 		JButton btnChangeCas = new JButton(new ButtonActionCas(this, "Changer cas choix opérateur"));

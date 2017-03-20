@@ -23,8 +23,8 @@ public class EcritureFichier {
 	protected double sumReputation = 0;
 	protected int simulationTime = 20;
 	protected Simulation simulation;
-	protected static final String FILE_NAME = "result.txt";
-	protected static final int NB_ECRITURE_FICHIER = 21;
+	protected final String FILE_NAME = "result.txt";
+	protected final int NB_ECRITURE_FICHIER = 21;
 	protected int nbTest = 0;
 
 	@Before

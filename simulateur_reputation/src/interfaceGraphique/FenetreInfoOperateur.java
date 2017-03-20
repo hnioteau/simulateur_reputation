@@ -41,48 +41,73 @@ public class FenetreInfoOperateur extends JFrame {
 	}
 
 	private JPanel buildContentPane() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-		panel.setBackground(Color.white);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		mainPanel.setBackground(Color.white);
 
+		JPanel subPanel1 = new JPanel();
+		subPanel1.setLayout(new FlowLayout(FlowLayout.LEFT));
+		subPanel1.setBackground(Color.white);
+		
+		JPanel subPanel2 = new JPanel();
+		subPanel2.setLayout(new FlowLayout(FlowLayout.LEFT));
+		subPanel2.setBackground(Color.white);
+		
+		JPanel subPanel3 = new JPanel();
+		subPanel3.setLayout(new FlowLayout(FlowLayout.LEFT));
+		subPanel3.setBackground(Color.white);
+		
+		JPanel subPanel4 = new JPanel();
+		subPanel4.setLayout(new FlowLayout(FlowLayout.LEFT));
+		subPanel4.setBackground(Color.white);
+		
+		
 		nomOp = new JLabel("Nom de l'opérateur");
-		panel.add(nomOp);
+		subPanel1.add(nomOp);
 
 		nomOperator = new JTextField();
 		nomOperator.setColumns(10);
 		nomOperator.setText("Operateur" + Main.listOp.size());
-		panel.add(nomOperator);
+		subPanel1.add(nomOperator);
+		
+		mainPanel.add(subPanel1);
 
 		valCapacite = new JLabel("Capacite de l'operateur");
-		panel.add(valCapacite);
+		subPanel2.add(valCapacite);
 
 		valeurCapacite = new JTextField();
 		valeurCapacite.setColumns(10);
 		valeurCapacite.setText("10000");
-		panel.add(valeurCapacite);
+		subPanel2.add(valeurCapacite);
+		
+		mainPanel.add(subPanel2);
 
 		reputation = new JLabel("Réputation");
-		panel.add(reputation);
+		subPanel3.add(reputation);
 
 		reput = new JTextField();
 		reput.setColumns(10);
 		reput.setText("0.5");
-		panel.add(reput);
+		subPanel3.add(reput);
+		
+		mainPanel.add(subPanel3);
 
 		if (Main.simulation.getProbaEchecCase() == 1) {
 			probEchec = new JLabel("Probilité échec");
-			panel.add(probEchec);
+			subPanel4.add(probEchec);
 
 			probabiliteEchec = new JTextField();
 			probabiliteEchec.setColumns(10);
 			probabiliteEchec.setText("0.5");
-			panel.add(probabiliteEchec);
+			subPanel4.add(probabiliteEchec);
+			
+			mainPanel.add(subPanel4);
 		}
 
 		JButton confirmation = new JButton(new ButtonConfirmationOperateur(this, "Ok"));
-		panel.add(confirmation);
-
-		return panel;
+		mainPanel.add(confirmation);
+		
+		return mainPanel;
 	}
 
 	public JTextField getValeurCapacite() {
