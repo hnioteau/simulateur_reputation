@@ -13,32 +13,46 @@ import projet.Simulation;
 
 public class TestReussiteEchecRequete {
 	protected Operator op1;
-	protected Operator op2;
 	protected Client client;
 	protected double sumReputation = 0;
 	protected int simulationTime = 20;
-	int testEchec = 0;
-	int testEchec2 = 0;
+	boolean testEchec = true;
+	boolean testEchec2 = false;
 	protected Simulation simulation;
 
 	@Before
 	public void setUp() throws Exception {
 		simulation = new Simulation();
-		op1 = new Operator("op1", 5000, 0.5);
-		op2 = new Operator("op2", 10000, 0.6);
+		op1 = new Operator("op1", 15000, 0.5);
 		client = new Client();
 		Main.listOp.add(op1);
-		Main.listOp.add(op2);
-		System.out.println(Main.listOp.size());
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
 
+	public void requestTreatment(Client client, Operator operator) {
+		double failure = Math.random();
+		if(this.client.getWeight() > op1.getCapacity() || failure <= op1.failChance()){
+			testEchec = true;
+		}else{
+			testEchec = false;
+		}
+		if (client.getWeight() > operator.getCapacity() || failure <= operator.failChance()) {
+			operator.setRepFailed();
+			testEchec2 = true;
+		} else {
+			operator.setRepSuccess();
+			operator.addRequest(client.copyClient());
+			testEchec2 = false;
+		}
+
+		simulation.updateSumReputation();
+	}
+
 	@Test
 	public void test() {
-		Operator chosenOp;
 		simulation.addOperators(Main.listOp);
 
 		/* Lancement de la simulation */
@@ -49,14 +63,7 @@ public class TestReussiteEchecRequete {
 			for (int i = 0; i < simulation.getListOperators().size(); ++i) {
 				simulation.getListOperators().get(i).checkRequestsState();
 			}
-
-			// Choix de l'operateur par le client.
-			chosenOp = simulation.pickOperator();
-			if (chosenOp != null)
-				simulation.requestTreatment(client, chosenOp);
-			else
-				break;
-
+				requestTreatment(client, op1);
 			--simulationTime;
 			assertEquals(testEchec, testEchec2);
 		}
