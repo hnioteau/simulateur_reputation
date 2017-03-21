@@ -75,6 +75,7 @@ public class ButtonConfirmationSetOp extends AbstractAction {
 
 				}
 			}
+		
 		}
 		fenetreInfoOp.setVisible(false);
 

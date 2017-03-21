@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -20,7 +21,14 @@ public class FenetreInfoOp extends JFrame {
 	 * 
 	 */
 	private int operateurChoisi = 0;
-	private JPanel panel;
+	
+	private JPanel mainPanel;
+	private JPanel subPanel1;
+	private JPanel subPanel2;
+	private JPanel subPanel3;
+	private JPanel subPanel4;
+	private JPanel subPanel5;
+	private JPanel subPanel6;
 
 	private JComboBox<String> combo;
 	private JLabel choixOp;
@@ -51,12 +59,20 @@ public class FenetreInfoOp extends JFrame {
 	}
 
 	private JPanel buildContentPane() {
-		panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-		panel.setBackground(Color.white);
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+		mainPanel.setBackground(Color.white);
+		
+		subPanel1 = new JPanel();
+		subPanel1.setLayout(new FlowLayout(FlowLayout.LEFT));
+		subPanel1.setBackground(Color.white);
 
+		subPanel2 = new JPanel();
+		subPanel2.setLayout(new FlowLayout(FlowLayout.CENTER));
+		subPanel2.setBackground(Color.white);
+		
 		choixOp = new JLabel("Opérateur à modifier");
-		panel.add(choixOp);
+		subPanel1.add(choixOp);
 
 		combo = new JComboBox<String>();
 
@@ -66,20 +82,38 @@ public class FenetreInfoOp extends JFrame {
 
 		combo.addActionListener(new ItemAction());
 		combo.setPreferredSize(new Dimension(150, 20));
-		panel.add(combo);
+		subPanel1.add(combo);
+		
+		
 
 		JButton confirmation = new JButton(new ButtonConfirmationSetOp(this, "Ok"));
-		panel.add(confirmation);
+		subPanel2.add(confirmation);
+		
+		mainPanel.add(subPanel1);
+		mainPanel.add(subPanel2);
 
-		return panel;
+		return mainPanel;
 	}
 
 	class ItemAction implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			JPanel jp = new JPanel();
-			jp.setLayout(new FlowLayout());
-			jp.setBackground(Color.white);
-
+			
+			subPanel3 = new JPanel();
+			subPanel3.setLayout(new FlowLayout(FlowLayout.LEFT));
+			subPanel3.setBackground(Color.white);
+			
+			subPanel4 = new JPanel();
+			subPanel4.setLayout(new FlowLayout(FlowLayout.LEFT));
+			subPanel4.setBackground(Color.white);
+			
+			subPanel5 = new JPanel();
+			subPanel5.setLayout(new FlowLayout(FlowLayout.LEFT));
+			subPanel5.setBackground(Color.white);
+			
+			subPanel6 = new JPanel();
+			subPanel6.setLayout(new FlowLayout(FlowLayout.LEFT));
+			subPanel6.setBackground(Color.white);
+			
 			int choixop = 0;
 			for (int i = 0; i < Main.listOp.size(); i++) {
 				if (Main.listOp.get(i).getName() == combo.getSelectedItem()) {
@@ -89,41 +123,51 @@ public class FenetreInfoOp extends JFrame {
 			}
 
 			nomOp = new JLabel("Nom de l'opérateur");
-			panel.add(nomOp);
+			subPanel3.add(nomOp);
 
 			nomOperator = new JTextField();
 			nomOperator.setColumns(10);
 			nomOperator.setText(Main.listOp.get(choixop).getName());
-			panel.add(nomOperator);
+			subPanel3.add(nomOperator);
 
-			valCapacite = new JLabel("\nCapacite de l'operateur");
-			panel.add(valCapacite);
+			mainPanel.add(subPanel3);
+			
+			valCapacite = new JLabel("Capacite de l'operateur");
+			subPanel4.add(valCapacite);
 
 			valeurCapacite = new JTextField();
 			valeurCapacite.setColumns(10);
 			valeurCapacite.setText(Integer.toString(Main.listOp.get(choixop).getMaxCapacity()));
-			panel.add(valeurCapacite);
+			subPanel4.add(valeurCapacite);
+			
+			mainPanel.add(subPanel4);
 
-			reputation = new JLabel("\nRéputation");
-			panel.add(reputation);
+			reputation = new JLabel("Réputation");
+			subPanel5.add(reputation);
 
 			reput = new JTextField();
 			reput.setColumns(10);
 			reput.setText(Double.toString(Main.listOp.get(choixop).getReputationInit()));
-			panel.add(reput);
+			subPanel5.add(reput);
+			
+			mainPanel.add(subPanel5);
 
 			if (Main.simulation.getProbaEchecCase() == 1) {
-				probEchec = new JLabel("\nProbilité échec");
-				panel.add(probEchec);
+				probEchec = new JLabel("Probilité échec");
+				subPanel6.add(probEchec);
 
 				probabiliteEchec = new JTextField();
 				probabiliteEchec.setColumns(10);
 				probabiliteEchec.setText(Double.toString(Main.listOp.get(choixop).getProbaEchecfixe()));
-				panel.add(probabiliteEchec);
+				subPanel6.add(probabiliteEchec);
 			}
+			
+			mainPanel.add(subPanel6);
+			
+			mainPanel.add(subPanel2);
 
-			panel.revalidate();
-			panel.repaint();
+			mainPanel.revalidate();
+			mainPanel.repaint();
 		}
 	}
 
