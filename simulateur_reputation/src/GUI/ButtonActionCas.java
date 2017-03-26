@@ -1,4 +1,4 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.event.ActionEvent;
 
@@ -9,7 +9,7 @@ import projet.Main;
 
 public class ButtonActionCas extends AbstractAction {
 
-	public ButtonActionCas(InterfaceGraphique2 interfacegraphique, String texte) {
+	public ButtonActionCas(InterfaceGraphique interfacegraphique, String texte) {
 		super(texte);
 	}
 
@@ -21,9 +21,9 @@ public class ButtonActionCas extends AbstractAction {
 				} else
 					Main.simulation.setUseCase(0);
 				if (Main.simulation.getUseCase() == 0)
-					InterfaceGraphique2.getUseCase().setText("Tous les opérateurs sont éligible");
+					InterfaceGraphique.getUseCase().setText("Tous les opérateurs sont éligible");
 				if (Main.simulation.getUseCase() == 1)
-					InterfaceGraphique2.getUseCase()
+					InterfaceGraphique.getUseCase()
 							.setText("Seul les opérateurs qui ont assez de capacité sont éligible");
 			}
 		});

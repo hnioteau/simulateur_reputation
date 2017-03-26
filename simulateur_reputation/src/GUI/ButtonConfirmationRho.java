@@ -1,4 +1,4 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.event.ActionEvent;
 
@@ -16,11 +16,11 @@ public class ButtonConfirmationRho extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
 
-		String valRho = fenetreInfoRho.getValeurRho().getText();
-		double valeurRho = Double.parseDouble(valRho);
+		String rhoString = fenetreInfoRho.getValeurRho().getText();
+		double rhoValue = Double.parseDouble(rhoString);
 
-		Simulation.setRepFactor(valeurRho);
-		InterfaceGraphique2.setRho("Valeur de rho : " + Double.toString(valeurRho));
+		Simulation.setRepFactor(rhoValue);
+		InterfaceGraphique.setRho("Valeur de rho : " + Double.toString(rhoValue));
 
 		fenetreInfoRho.setVisible(false);
 

@@ -1,4 +1,4 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.event.ActionEvent;
 
@@ -20,7 +20,7 @@ public class ButtonConfirmationTimer extends AbstractAction {
 		int timer = Integer.parseInt(timerSimulation);
 
 		Main.simulation.setSimulationTime(timer);
-		InterfaceGraphique2.setTimer("Durée de la simulation : " + Integer.toString(timer));
+		InterfaceGraphique.setTimer("Durée de la simulation : " + Integer.toString(timer));
 
 		fenetreInfoTimer.setVisible(false);
 

@@ -1,4 +1,4 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -15,8 +15,8 @@ public class FenetreInfoTimer extends JFrame {
 	/**
 	 * 
 	 */
-	private JLabel durSimulation;
-	private JTextField dureeSimulation;
+	private JLabel simulationTimeLabel;
+	private JTextField simulationTimeTF;
 
 	public FenetreInfoTimer() {
 		super();
@@ -36,13 +36,13 @@ public class FenetreInfoTimer extends JFrame {
 		panel.setLayout(new FlowLayout());
 		panel.setBackground(Color.white);
 
-		durSimulation = new JLabel("Duree de la simulation");
-		panel.add(durSimulation);
+		simulationTimeLabel = new JLabel("Duree de la simulation");
+		panel.add(simulationTimeLabel);
 
-		dureeSimulation = new JTextField();
-		dureeSimulation.setColumns(10);
-		dureeSimulation.setText(Integer.toString(Main.simulation.getSimulationTime()));
-		panel.add(dureeSimulation);
+		simulationTimeTF = new JTextField();
+		simulationTimeTF.setColumns(10);
+		simulationTimeTF.setText(Integer.toString(Main.simulation.getSimulationTime()));
+		panel.add(simulationTimeTF);
 
 		JButton confirmation = new JButton(new ButtonConfirmationTimer(this, "Ok"));
 		panel.add(confirmation);
@@ -51,6 +51,6 @@ public class FenetreInfoTimer extends JFrame {
 	}
 
 	public JTextField getDureeSimulation() {
-		return dureeSimulation;
+		return simulationTimeTF;
 	}
 }

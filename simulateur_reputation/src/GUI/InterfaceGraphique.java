@@ -1,8 +1,6 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,14 +10,14 @@ import javax.swing.JTextArea;
 
 import projet.Main;
 
-public class InterfaceGraphique2 extends JFrame {
-	private static JTextArea clientEtOperateur;
+public class InterfaceGraphique extends JFrame {
+	private static JTextArea clientAndOperator;
 	private static JLabel useCase;
-	private static JLabel echecCase;
+	private static JLabel failChanceCase;
 	private static JLabel timerSimulation;
 	private static JLabel valRho;
 
-	public InterfaceGraphique2() {
+	public InterfaceGraphique() {
 		super();
 		build();
 	}
@@ -111,18 +109,18 @@ public class InterfaceGraphique2 extends JFrame {
 			useCase.setText("Seul les opérateurs qui ont assez de capacité sont éligible");
 		subPanel5.add(useCase);
 
-		echecCase = new JLabel();
-		if (Main.simulation.getProbaEchecCase() == 0)
-			echecCase.setText("Probabilité d'échec en fonction de la formule");
-		if (Main.simulation.getProbaEchecCase() == 1)
-			echecCase.setText("Probabilité d'échec fixe pour chaque opérateur");
-		subPanel6.add(echecCase);
+		failChanceCase = new JLabel();
+		if (Main.simulation.getFailChanceCase() == 0)
+			failChanceCase.setText("Probabilité d'échec en fonction de la formule");
+		if (Main.simulation.getFailChanceCase() == 1)
+			failChanceCase.setText("Probabilité d'échec fixe pour chaque opérateur");
+		subPanel6.add(failChanceCase);
 
-		clientEtOperateur = new JTextArea("Client : Duree de la requete " + Main.client.getDuration()
+		clientAndOperator = new JTextArea("Client : Duree de la requete " + Main.client.getDuration()
 				+ "     Taille de la requete " + Main.client.getWeight() + "\n");
-		clientEtOperateur.setEditable(false);
-		clientEtOperateur.setOpaque(false);
-		subPanel7.add(clientEtOperateur);
+		clientAndOperator.setEditable(false);
+		clientAndOperator.setOpaque(false);
+		subPanel7.add(clientAndOperator);
 
 		mainPanel.add(subPanel1);
 		mainPanel.add(subPanel2);
@@ -135,12 +133,12 @@ public class InterfaceGraphique2 extends JFrame {
 		return mainPanel;
 	}
 
-	static void setClientEtOperateur(String string) {
-		clientEtOperateur.setText(string);
+	static void setClientAndOperator(String string) {
+		clientAndOperator.setText(string);
 	}
 
-	static String getClientEtoperateur() {
-		return clientEtOperateur.getText();
+	static String getClientAndOperator() {
+		return clientAndOperator.getText();
 	}
 
 	static JLabel getUseCase() {
@@ -155,12 +153,12 @@ public class InterfaceGraphique2 extends JFrame {
 		timerSimulation.setText(string);
 	}
 
-	static JLabel getProbaCase() {
-		return echecCase;
+	static JLabel getFailChanceCase() {
+		return failChanceCase;
 	}
 
-	static void setProbaCase(JLabel echecCase) {
-		InterfaceGraphique2.echecCase = echecCase;
+	static void setFailChanceCase(JLabel failChanceCase) {
+		InterfaceGraphique.failChanceCase = failChanceCase;
 	}
 
 	static void setRho(String string) {

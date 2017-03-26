@@ -1,4 +1,4 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -15,17 +15,17 @@ public class FenetreInfoOperateur extends JFrame {
 	/**
 	 * 
 	 */
-	private JLabel nomOp;
-	private JTextField nomOperator;
+	private JLabel opNameLabel;
+	private JTextField opNameTF;
 
-	private JLabel valCapacite;
-	private JTextField valeurCapacite;
+	private JLabel capacityLabel;
+	private JTextField capacityTF;
 
-	private JLabel reputation;
-	private JTextField reput;
+	private JLabel reputationLabel;
+	private JTextField reputationTF;
 
-	private JLabel probEchec;
-	private JTextField probabiliteEchec;
+	private JLabel failChanceLabel;
+	private JTextField failChanceTF;
 
 	public FenetreInfoOperateur() {
 		super();
@@ -62,44 +62,44 @@ public class FenetreInfoOperateur extends JFrame {
 		subPanel4.setBackground(Color.white);
 		
 		
-		nomOp = new JLabel("Nom de l'opérateur");
-		subPanel1.add(nomOp);
+		opNameLabel = new JLabel("Nom de l'opérateur");
+		subPanel1.add(opNameLabel);
 
-		nomOperator = new JTextField();
-		nomOperator.setColumns(10);
-		nomOperator.setText("Operateur" + Main.listOp.size());
-		subPanel1.add(nomOperator);
+		opNameTF = new JTextField();
+		opNameTF.setColumns(10);
+		opNameTF.setText("Operateur" + Main.listOp.size());
+		subPanel1.add(opNameTF);
 		
 		mainPanel.add(subPanel1);
 
-		valCapacite = new JLabel("Capacite de l'operateur");
-		subPanel2.add(valCapacite);
+		capacityLabel = new JLabel("Capacite de l'operateur");
+		subPanel2.add(capacityLabel);
 
-		valeurCapacite = new JTextField();
-		valeurCapacite.setColumns(10);
-		valeurCapacite.setText("10000");
-		subPanel2.add(valeurCapacite);
+		capacityTF = new JTextField();
+		capacityTF.setColumns(10);
+		capacityTF.setText("10000");
+		subPanel2.add(capacityTF);
 		
 		mainPanel.add(subPanel2);
 
-		reputation = new JLabel("Réputation");
-		subPanel3.add(reputation);
+		reputationLabel = new JLabel("Réputation");
+		subPanel3.add(reputationLabel);
 
-		reput = new JTextField();
-		reput.setColumns(10);
-		reput.setText("0.5");
-		subPanel3.add(reput);
+		reputationTF = new JTextField();
+		reputationTF.setColumns(10);
+		reputationTF.setText("0.5");
+		subPanel3.add(reputationTF);
 		
 		mainPanel.add(subPanel3);
 
-		if (Main.simulation.getProbaEchecCase() == 1) {
-			probEchec = new JLabel("Probilité échec");
-			subPanel4.add(probEchec);
+		if (Main.simulation.getFailChanceCase() == 1) {
+			failChanceLabel = new JLabel("Probilité échec");
+			subPanel4.add(failChanceLabel);
 
-			probabiliteEchec = new JTextField();
-			probabiliteEchec.setColumns(10);
-			probabiliteEchec.setText("0.5");
-			subPanel4.add(probabiliteEchec);
+			failChanceTF = new JTextField();
+			failChanceTF.setColumns(10);
+			failChanceTF.setText("0.5");
+			subPanel4.add(failChanceTF);
 			
 			mainPanel.add(subPanel4);
 		}
@@ -111,18 +111,18 @@ public class FenetreInfoOperateur extends JFrame {
 	}
 
 	public JTextField getValeurCapacite() {
-		return valeurCapacite;
+		return capacityTF;
 	}
 
 	public JTextField getReputation() {
-		return reput;
+		return reputationTF;
 	}
 
 	public JTextField getNomOperateur() {
-		return nomOperator;
+		return opNameTF;
 	}
 
 	public JTextField getProbaEchec() {
-		return probabiliteEchec;
+		return failChanceTF;
 	}
 }

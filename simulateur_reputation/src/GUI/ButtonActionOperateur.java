@@ -1,4 +1,4 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.event.ActionEvent;
 
@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.SwingUtilities;
 
 public class ButtonActionOperateur extends AbstractAction {
-	public ButtonActionOperateur(InterfaceGraphique2 interfacegraphique, String texte) {
+	public ButtonActionOperateur(InterfaceGraphique interfacegraphique, String texte) {
 		super(texte);
 	}
 

@@ -1,4 +1,4 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.event.ActionEvent;
 
@@ -9,14 +9,14 @@ import projet.Main;
 
 public class ButtonActionReset extends AbstractAction {
 
-	public ButtonActionReset(InterfaceGraphique2 interfacegraphique, String texte) {
+	public ButtonActionReset(InterfaceGraphique interfacegraphique, String texte) {
 		super(texte);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				InterfaceGraphique2.setClientEtOperateur("Client : Duree de la requete " + Main.client.getDuration()
+				InterfaceGraphique.setClientAndOperator("Client : Duree de la requete " + Main.client.getDuration()
 						+ "     Taille de la requete " + Main.client.getWeight() + "\n");
 				Main.listOp.clear();
 			}

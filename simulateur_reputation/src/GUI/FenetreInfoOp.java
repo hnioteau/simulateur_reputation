@@ -1,4 +1,4 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,19 +31,19 @@ public class FenetreInfoOp extends JFrame {
 	private JPanel subPanel6;
 
 	private JComboBox<String> combo;
-	private JLabel choixOp;
+	private JLabel opChoiceLabel;
 
-	private JLabel nomOp;
-	private JTextField nomOperator;
+	private JLabel opNameLabel;
+	private JTextField opNameTF;
 
-	private JLabel valCapacite;
-	private JTextField valeurCapacite;
+	private JLabel capacityLabel;
+	private JTextField capacityTF;
 
-	private JLabel reputation;
-	private JTextField reput;
+	private JLabel reputationLabel;
+	private JTextField reputationTF;
 
-	private JLabel probEchec;
-	private JTextField probabiliteEchec;
+	private JLabel failChanceLabel;
+	private JTextField failChanceTF;
 
 	public FenetreInfoOp() {
 		super();
@@ -71,8 +71,8 @@ public class FenetreInfoOp extends JFrame {
 		subPanel2.setLayout(new FlowLayout(FlowLayout.CENTER));
 		subPanel2.setBackground(Color.white);
 		
-		choixOp = new JLabel("Opérateur à modifier");
-		subPanel1.add(choixOp);
+		opChoiceLabel = new JLabel("Opérateur à modifier");
+		subPanel1.add(opChoiceLabel);
 
 		combo = new JComboBox<String>();
 
@@ -122,44 +122,44 @@ public class FenetreInfoOp extends JFrame {
 				}
 			}
 
-			nomOp = new JLabel("Nom de l'opérateur");
-			subPanel3.add(nomOp);
+			opNameLabel = new JLabel("Nom de l'opérateur");
+			subPanel3.add(opNameLabel);
 
-			nomOperator = new JTextField();
-			nomOperator.setColumns(10);
-			nomOperator.setText(Main.listOp.get(choixop).getName());
-			subPanel3.add(nomOperator);
+			opNameTF = new JTextField();
+			opNameTF.setColumns(10);
+			opNameTF.setText(Main.listOp.get(choixop).getName());
+			subPanel3.add(opNameTF);
 
 			mainPanel.add(subPanel3);
 			
-			valCapacite = new JLabel("Capacite de l'operateur");
-			subPanel4.add(valCapacite);
+			capacityLabel = new JLabel("Capacite de l'operateur");
+			subPanel4.add(capacityLabel);
 
-			valeurCapacite = new JTextField();
-			valeurCapacite.setColumns(10);
-			valeurCapacite.setText(Integer.toString(Main.listOp.get(choixop).getMaxCapacity()));
-			subPanel4.add(valeurCapacite);
+			capacityTF = new JTextField();
+			capacityTF.setColumns(10);
+			capacityTF.setText(Integer.toString(Main.listOp.get(choixop).getMaxCapacity()));
+			subPanel4.add(capacityTF);
 			
 			mainPanel.add(subPanel4);
 
-			reputation = new JLabel("Réputation");
-			subPanel5.add(reputation);
+			reputationLabel = new JLabel("Réputation");
+			subPanel5.add(reputationLabel);
 
-			reput = new JTextField();
-			reput.setColumns(10);
-			reput.setText(Double.toString(Main.listOp.get(choixop).getReputationInit()));
-			subPanel5.add(reput);
+			reputationTF = new JTextField();
+			reputationTF.setColumns(10);
+			reputationTF.setText(Double.toString(Main.listOp.get(choixop).getReputationInit()));
+			subPanel5.add(reputationTF);
 			
 			mainPanel.add(subPanel5);
 
-			if (Main.simulation.getProbaEchecCase() == 1) {
-				probEchec = new JLabel("Probilité échec");
-				subPanel6.add(probEchec);
+			if (Main.simulation.getFailChanceCase() == 1) {
+				failChanceLabel = new JLabel("Probilité échec");
+				subPanel6.add(failChanceLabel);
 
-				probabiliteEchec = new JTextField();
-				probabiliteEchec.setColumns(10);
-				probabiliteEchec.setText(Double.toString(Main.listOp.get(choixop).getProbaEchecfixe()));
-				subPanel6.add(probabiliteEchec);
+				failChanceTF = new JTextField();
+				failChanceTF.setColumns(10);
+				failChanceTF.setText(Double.toString(Main.listOp.get(choixop).getFixedFailChance()));
+				subPanel6.add(failChanceTF);
 			}
 			
 			mainPanel.add(subPanel6);
@@ -172,19 +172,19 @@ public class FenetreInfoOp extends JFrame {
 	}
 
 	public JTextField getValeurCapacite() {
-		return valeurCapacite;
+		return capacityTF;
 	}
 
 	public JTextField getReputation() {
-		return reput;
+		return reputationTF;
 	}
 
 	public JTextField getNomOperateur() {
-		return nomOperator;
+		return opNameTF;
 	}
 
 	public JTextField getProbaEchec() {
-		return probabiliteEchec;
+		return failChanceTF;
 	}
 
 	public int getOperateurChoisi() {

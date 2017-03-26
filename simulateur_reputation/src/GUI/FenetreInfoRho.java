@@ -1,4 +1,4 @@
-package interfaceGraphique;
+package GUI;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -15,8 +15,8 @@ public class FenetreInfoRho extends JFrame {
 	/**
 	 * 
 	 */
-	private JLabel valRho;
-	private JTextField valeurRho;
+	private JLabel rhoValueLabel;
+	private JTextField rhoValueTF;
 
 	public FenetreInfoRho() {
 		super();
@@ -36,13 +36,13 @@ public class FenetreInfoRho extends JFrame {
 		panel.setLayout(new FlowLayout());
 		panel.setBackground(Color.white);
 
-		valRho = new JLabel("Valeur de rho");
-		panel.add(valRho);
+		rhoValueLabel = new JLabel("Valeur de rho");
+		panel.add(rhoValueLabel);
 
-		valeurRho = new JTextField();
-		valeurRho.setColumns(10);
-		valeurRho.setText(Double.toString(Main.simulation.getRepFactor()));
-		panel.add(valeurRho);
+		rhoValueTF = new JTextField();
+		rhoValueTF.setColumns(10);
+		rhoValueTF.setText(Double.toString(Main.simulation.getRepFactor()));
+		panel.add(rhoValueTF);
 
 		JButton confirmation = new JButton(new ButtonConfirmationRho(this, "Ok"));
 		panel.add(confirmation);
@@ -51,7 +51,7 @@ public class FenetreInfoRho extends JFrame {
 	}
 
 	public JTextField getValeurRho() {
-		return valeurRho;
+		return rhoValueTF;
 	}
 
 }

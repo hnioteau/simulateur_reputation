@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
-import interfaceGraphique.InterfaceGraphique2;
+import GUI.InterfaceGraphique;
 
 public class Main {
 	public static Client client = new Client();
@@ -14,7 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				InterfaceGraphique2 interfaceGraphique = new InterfaceGraphique2();
+				InterfaceGraphique interfaceGraphique = new InterfaceGraphique();
 				interfaceGraphique.setVisible(true);
 			}
 		});

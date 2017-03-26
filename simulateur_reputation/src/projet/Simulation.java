@@ -29,50 +29,6 @@ public class Simulation {
 		setSimulationTime(DEFAULT_TIME);
 	}
 
-	/*
-	 * Getters et setters pour les attributs de la classe.
-	 */
-	public double getSumReputation() {
-		return sumReputation;
-	}
-
-	public void setSumReputation(double sumReputation) {
-		if (sumReputation >= 0)
-			this.sumReputation = sumReputation;
-	}
-
-	public int getSimulationTime() {
-		return simulationTime;
-	}
-
-	public void setSimulationTime(int simulationTime) {
-		if (simulationTime > 0)
-			this.simulationTime = simulationTime;
-	}
-
-	public double getRepFactor() {
-		return repFactor;
-	}
-
-	public static void setRepFactor(double repFactor) {
-		Simulation.repFactor = repFactor;
-	}
-
-	public int getUseCase() {
-		return opChoiceCase;
-	}
-
-	public void setUseCase(int useCase) {
-		this.opChoiceCase = useCase;
-	}
-
-	public int getProbaEchecCase() {
-		return failChanceCase;
-	}
-
-	public void setProbaEchecCase(int probaEchecCase) {
-		this.failChanceCase = probaEchecCase;
-	}
 
 	/*
 	 * Mise a jour de la somme des reputations.
@@ -165,7 +121,7 @@ public class Simulation {
 
 		} else {
 
-			if (client.getWeight() > operator.getCapacity() || failure <= operator.getProbaEchecfixe()) {
+			if (client.getWeight() > operator.getCapacity() || failure <= operator.getFixedFailChance()) {
 				operator.setRepFailed();
 			} else {
 				operator.setRepSuccess();
@@ -216,8 +172,7 @@ public class Simulation {
 				e1.printStackTrace();
 			}
 
-			// Verification, pour chaque operateur, du temps restant pour les
-			// requetes.
+			// Verification, pour chaque operateur, du temps restant pour les requetes.
 			for (int i = 0; i < getListOperators().size(); ++i) {
 				getListOperators().get(i).checkRequestsState();
 			}
@@ -228,7 +183,7 @@ public class Simulation {
 				requestTreatment(client, chosenOp);
 			else {
 				try {
-					fileOut.write("Aucun opérateur ne peut etre choisit");
+					fileOut.write("Aucun opérateur ne peut etre choisi.");
 					fileOut.write(System.lineSeparator());
 					fileOut.flush();
 				} catch (IOException e1) {
@@ -252,13 +207,13 @@ public class Simulation {
 		}
 
 		// On reinitialise les parametres pour la prochaine simulation.
-		getListOperators().clear();
-		setSumReputation(0);
-		simulationTime = tmp;
 		for (int i = 0; i < Main.listOp.size(); ++i)
 			Main.listOp.get(i).setReputation(Main.listOp.get(i).getReputationInit());
+		updateSumReputation();
+		simulationTime = tmp;
+		
 
-		// Fermeture du fichier
+		// Fermeture de la sortie fichier
 		try {
 			if (fileOut != null)
 				fileOut.close();
@@ -282,6 +237,52 @@ public class Simulation {
 			System.out.println("La fonction Desktop n'est pas supportée par votre Système d'exploitation");
 		}
 	}
+	
+	
+	/*
+	 * Getters et setters pour les attributs de la classe.
+	 */
+	public double getSumReputation() {
+		return sumReputation;
+	}
+
+	public void setSumReputation(double sumReputation) {
+		if (sumReputation >= 0)
+			this.sumReputation = sumReputation;
+	}
+
+	public int getSimulationTime() {
+		return simulationTime;
+	}
+
+	public void setSimulationTime(int simulationTime) {
+		if (simulationTime > 0)
+			this.simulationTime = simulationTime;
+	}
+
+	public double getRepFactor() {
+		return repFactor;
+	}
+
+	public static void setRepFactor(double repFactor) {
+		Simulation.repFactor = repFactor;
+	}
+
+	public int getUseCase() {
+		return opChoiceCase;
+	}
+
+	public void setUseCase(int useCase) {
+		this.opChoiceCase = useCase;
+	}
+
+	public int getFailChanceCase() {
+		return failChanceCase;
+	}
+
+	public void setFailChanceCase(int failChanceCase) {
+		this.failChanceCase = failChanceCase;
+	}
 
 	public ArrayList<Operator> getListOperators() {
 		return listOperators;
@@ -290,4 +291,5 @@ public class Simulation {
 	public void setListOperators(ArrayList<Operator> listOperators) {
 		this.listOperators = listOperators;
 	}
+
 }

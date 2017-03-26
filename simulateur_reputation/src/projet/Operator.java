@@ -68,12 +68,12 @@ public class Operator {
 		this.maxCapacity = maxCap;
 	}
 	
-	public double getProbaEchecfixe() {
+	public double getFixedFailChance() {
 		return fixedFailChance;
 	}
 
-	public void setProbaEchecfixe(double probaEchecfixe) {
-		this.fixedFailChance = probaEchecfixe;
+	public void setFixedFailChance(double failChance) {
+		this.fixedFailChance = failChance;
 	}
 
 	public String getName() {
