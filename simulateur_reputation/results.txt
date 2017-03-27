@@ -1,41 +1,21 @@
-1
 Operateur0 rep = 0.5 
-2
 Operateur0 rep = 0.75 
-3
 Operateur0 rep = 0.875 
-4
-Operateur0 rep = 0.9375 
-5
-Operateur0 rep = 0.46875 
-6
-Operateur0 rep = 0.234375 
-7
-Operateur0 rep = 0.1171875 
-8
-Operateur0 rep = 0.05859375 
-9
-Operateur0 rep = 0.529296875 
-10
-Operateur0 rep = 0.7646484375 
-11
-Operateur0 rep = 0.88232421875 
-12
-Operateur0 rep = 0.441162109375 
-13
-Operateur0 rep = 0.7205810546875 
-14
-Operateur0 rep = 0.86029052734375 
-15
-Operateur0 rep = 0.430145263671875 
-16
-Operateur0 rep = 0.2150726318359375 
-17
-Operateur0 rep = 0.6075363159179688 
-18
-Operateur0 rep = 0.3037681579589844 
-19
-Operateur0 rep = 0.6518840789794922 
-20
-Operateur0 rep = 0.3259420394897461 
-Operateur0 rep = 0.16297101974487305 
+Operateur0 rep = 0.4375 
+Operateur0 rep = 0.71875 
+Operateur0 rep = 0.859375 
+Operateur0 rep = 0.9296875 
+Operateur0 rep = 0.46484375 
+Operateur0 rep = 0.232421875 
+Operateur0 rep = 0.1162109375 
+Operateur0 rep = 0.05810546875 
+Operateur0 rep = 0.029052734375 
+Operateur0 rep = 0.0145263671875 
+Operateur0 rep = 0.50726318359375 
+Operateur0 rep = 0.753631591796875 
+Operateur0 rep = 0.3768157958984375 
+Operateur0 rep = 0.6884078979492188 
+Operateur0 rep = 0.3442039489746094 
+Operateur0 rep = 0.1721019744873047 
+Operateur0 rep = 0.08605098724365234 
+Operateur0 rep = 0.5430254936218262 

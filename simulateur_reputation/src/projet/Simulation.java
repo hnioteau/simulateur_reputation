@@ -151,12 +151,6 @@ public class Simulation {
 		addOperators(Main.listOp);
 		/* Lancement de la simulation */
 		while (simulationTime != 0) {
-			try {
-				fileOut.write(System.lineSeparator());
-				fileOut.flush();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
 			// Ecriture en fichier des parametres de la simulation
 			try {
 				for (int i = 0; i < getListOperators().size(); ++i) {

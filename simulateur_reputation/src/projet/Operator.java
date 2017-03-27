@@ -30,6 +30,58 @@ public class Operator {
 		setReputation(rep);
 	}
 
+	
+	/*
+	 * Ajout d'une nouvelle requete a la liste.
+	 */
+	public void addRequest(Client client) {
+		getListRequests().add(client);
+		setCapacity(getCapacity() - client.getWeight());
+	}
+	
+
+	/*
+	 * Modifie la reputation de l'operateur suite a l'echec d'une requete.
+	 */
+	public void setRepSuccess() {
+		reputation = Main.simulation.getRepFactor() * reputation + (1 - Main.simulation.getRepFactor());
+	}
+
+	
+	/*
+	 * Modifie la reputation de l'operateur suite a la reussite d'une requete.
+	 */
+	public void setRepFailed() {
+		reputation = Main.simulation.getRepFactor() * reputation;
+	}
+
+	
+	/*
+	 * Calcule la probabilite d'echec de l'operateur.
+	 */
+	public double failChance() {
+		return 1 - ((double) capacity / (double) maxCapacity);
+	}
+
+	
+	/*
+	 * Verifie l'etat des requetes. Si une requete atteint 0 de duree, la
+	 * supprime de la liste des requetes.
+	 */
+	public void checkRequestsState() {
+		for (int j = 0; j < getListRequests().size(); j++) {
+			Client client = getListRequests().get(j);
+			int reqTime = client.getDuration();
+			client.setDuration(reqTime - 1);
+
+			if (client.getDuration() == 0) {
+				getListRequests().remove(j);
+				setCapacity(getCapacity() + client.getWeight());
+			}
+		}
+	}
+
+	
 	/*
 	 * Getters et setters pour les attributs de la classe.
 	 */
@@ -47,6 +99,7 @@ public class Operator {
 	}
 
 	public void setReputationInit(double rep) {
+		
 		if (rep <= 1 && rep >= 0)
 			reputationInit = rep;
 	}
@@ -99,56 +152,6 @@ public class Operator {
 		if (sumCap <= this.maxCapacity)
 			this.listRequests = listReq;
 	}
-
 	
-	/*
-	 * Ajout d'une nouvelle requete � la liste.
-	 */
-	public void addRequest(Client client) {
-		getListRequests().add(client);
-		setCapacity(getCapacity() - client.getWeight());
-	}
-	
-
-	/*
-	 * Modifie la reputation de l'operateur suite a l'echec d'une requete.
-	 */
-	public void setRepSuccess() {
-		reputation = Main.simulation.getRepFactor() * reputation + (1 - Main.simulation.getRepFactor());
-	}
-
-	
-	/*
-	 * Modifie la reputation de l'operateur suite � la reussite d'une requete.
-	 */
-	public void setRepFailed() {
-		reputation = Main.simulation.getRepFactor() * reputation;
-	}
-
-	
-	/*
-	 * Calcule la probabilite d'echec de l'operateur.
-	 */
-	public double failChance() {
-		return 1 - ((double) capacity / (double) maxCapacity);
-	}
-
-	
-	/*
-	 * Verifie l'etat des requetes. Si une requete atteint 0 de duree, la
-	 * supprime de la liste des requetes.
-	 */
-	public void checkRequestsState() {
-		for (int j = 0; j < getListRequests().size(); j++) {
-			Client client = getListRequests().get(j);
-			int reqTime = client.getDuration();
-			client.setDuration(reqTime - 1);
-
-			if (client.getDuration() == 0) {
-				getListRequests().remove(j);
-				setCapacity(getCapacity() + client.getWeight());
-			}
-		}
-	}
 
 }
