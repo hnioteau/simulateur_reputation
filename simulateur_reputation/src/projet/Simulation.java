@@ -149,12 +149,9 @@ public class Simulation {
 		}
 
 		addOperators(Main.listOp);
-		int test = 0;
 		/* Lancement de la simulation */
 		while (simulationTime != 0) {
-			++test;
 			try {
-				fileOut.write(Integer.toString(test));
 				fileOut.write(System.lineSeparator());
 				fileOut.flush();
 			} catch (IOException e1) {

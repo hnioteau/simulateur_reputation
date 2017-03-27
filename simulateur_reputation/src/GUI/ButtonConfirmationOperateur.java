@@ -37,10 +37,6 @@ public class ButtonConfirmationOperateur extends AbstractAction {
 
 		Main.listOp.add(operator);
 		
-		/*System.out.println(Main.listOp.get(Main.listOp.size() - 1).getName() + " réputation initiale : "
-				+ Main.listOp.get(Main.listOp.size() - 1).getReputationInit() + " capacité initiale : "
-				+ Main.listOp.get(Main.listOp.size() - 1).getCapacity());
-*/
 		if (Main.simulation.getFailChanceCase() == 0) {
 			InterfaceGraphique.setClientAndOperator(InterfaceGraphique.getClientAndOperator() + opName
 					+ " : Capacite de l'operateur " + operator.getMaxCapacity() + "     Reputation de l'operateur "
